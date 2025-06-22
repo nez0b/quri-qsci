@@ -1,0 +1,15 @@
+[project]
+name = "te-qsci-project"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "matplotlib>=3.10.3",
+    "numpy>=1.24.0,<2.0.0",
+    "quri-parts[qulacs,pyscf,openfermion]>=0.22.1",
+    "quri-algo>=0.2.0",
+    "scipy>=1.15.3",
+    "pyscf>=2.6.0",
+    "seaborn>=0.13.2",
+]
