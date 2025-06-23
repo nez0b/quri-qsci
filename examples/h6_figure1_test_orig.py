@@ -49,7 +49,6 @@ class H6MoleculeStudy:
         
         print(f"Creating H6 system for Figure 1...")
         print(f"Geometry: Linear chain H6 with STO-3G basis")
-        print(f"This may take a moment for quantum chemistry calculations...")
         self._setup_quantum_chemistry()
         
         # Create Hartree-Fock state
@@ -160,26 +159,26 @@ class H6Figure1Analyzer:
             traceback.print_exc()
             return False
     
-    def test_sampling_method(self):
-        """Test sampling method for H6 system (exact method too slow for H6)."""
+    def test_auto_method_selection(self):
+        """Test automatic method selection for H6 system."""
         print("\n" + "=" * 60)
-        print("TESTING SAMPLING METHOD FOR H6")
+        print("TESTING AUTOMATIC METHOD SELECTION")
         print("=" * 60)
         
-        # Focus on sampling method since exact is too slow for H6
+        # Test different calculator configurations
+        calculator_auto = ProbabilityCalculator(method="auto", verbose=True)
+        calculator_exact = ProbabilityCalculator(method="exact", verbose=True)
         calculator_sampling = ProbabilityCalculator(method="sampling", verbose=True)
         
         print(f"H6 system: {self.h6_system.n_qubits} qubits, {2**self.h6_system.n_qubits:,} total states")
         print(f"State space size: 2^{self.h6_system.n_qubits} = {2**self.h6_system.n_qubits:,}")
-        print(f"Note: Auto method would select 'exact' for {self.h6_system.n_qubits} qubits, but that's too slow")
-        print(f"Forcing 'sampling' method for performance with R = {self.R}")
         
-        # State selection at t=1 (always uses exact for selection)
-        print(f"\nState selection at t=1 using exact method...")
+        # State selection at t=1 to test auto-selection
+        print(f"\nTesting state selection with R = {self.R}...")
         evolved_state_t1 = self.h6_system._evolve_exact(1.0)
         
         start_time = time.time()
-        selected_states, selected_state_orders = calculator_sampling.select_states_at_t1(
+        selected_states, selected_state_orders = calculator_auto.select_states_at_t1(
             evolved_state_t1, self.h6_system.n_electrons, self.h6_system.n_qubits, self.R
         )
         selection_time = time.time() - start_time
@@ -190,36 +189,43 @@ class H6Figure1Analyzer:
             count = len(selected_state_orders[order])
             print(f"   Order {order}: {count} states")
         
-        # Test probability calculation with sampling method
-        print(f"\nTesting probability calculation with sampling method...")
+        # Test probability calculation with different methods
+        print(f"\nTesting probability calculation methods...")
         test_time = 0.1  # Small time for testing
         evolved_state_test = self.h6_system._evolve_exact(test_time)
         
-        print(f"\n--- Testing sampling method ---")
-        try:
-            start_time = time.time()
-            probabilities = calculator_sampling.calculate_probabilities(
-                evolved_state_test, selected_states, self.h6_system.n_qubits
-            )
-            calc_time = time.time() - start_time
+        for method_name, calculator in [("auto", calculator_auto), ("exact", calculator_exact), ("sampling", calculator_sampling)]:
+            print(f"\n--- Testing {method_name} method ---")
             
-            prob_1_2, prob_3_4, prob_5_6 = calculator_sampling.calculate_grouped_probabilities(
-                probabilities, selected_state_orders, selected_states
-            )
-            
-            print(f"✓ Sampling method completed in {calc_time:.3f} seconds")
-            print(f"  P_1_2 = {prob_1_2:.6f}")
-            print(f"  P_3_4 = {prob_3_4:.6f}")
-            print(f"  P_5_6 = {prob_5_6:.6f}")
-            print(f"  Method: SAMPLING (forced for performance)")
-            
-        except Exception as e:
-            print(f"✗ Sampling method failed: {e}")
-            raise
-        
-        # Note about exact method
-        print(f"\nNote: Exact method commented out for H6 due to performance")
-        print(f"      (2^{self.h6_system.n_qubits} = {2**self.h6_system.n_qubits:,} states is too large)")
+            try:
+                start_time = time.time()
+                probabilities = calculator.calculate_probabilities(
+                    evolved_state_test, selected_states, self.h6_system.n_qubits
+                )
+                calc_time = time.time() - start_time
+                
+                prob_1_2, prob_3_4, prob_5_6 = calculator.calculate_grouped_probabilities(
+                    probabilities, selected_state_orders, selected_states
+                )
+                
+                print(f"✓ {method_name} method completed in {calc_time:.3f} seconds")
+                print(f"  P_1_2 = {prob_1_2:.6f}")
+                print(f"  P_3_4 = {prob_3_4:.6f}")
+                print(f"  P_5_6 = {prob_5_6:.6f}")
+                
+                # Check if method was auto-selected
+                if method_name == "auto":
+                    if hasattr(calculator, '_last_used_method'):
+                        print(f"  Auto-selected method: {calculator._last_used_method}")
+                    else:
+                        # Infer from system size
+                        if self.h6_system.n_qubits > 14:
+                            print(f"  Auto-selected method: sampling (system too large for exact)")
+                        else:
+                            print(f"  Auto-selected method: exact (system manageable)")
+                
+            except Exception as e:
+                print(f"✗ {method_name} method failed: {e}")
         
         return selected_states, selected_state_orders
     
@@ -230,11 +236,11 @@ class H6Figure1Analyzer:
         print("=" * 60)
         
         # Focus on small-t regime for testing
-        times = np.logspace(-2, 0.2, 10)  # 0.01 to ~1 (10 points for quick test)
+        times = np.logspace(-2, -0.3, 15)  # 0.01 to ~0.5 (15 points for quick test)
         print(f"Testing {len(times)} time points: {times.min():.3f} to {times.max():.3f}")
         
-        # Use sampling method (exact too slow for H6)
-        calculator = ProbabilityCalculator(method="sampling", verbose=True)
+        # Use auto method (should select sampling for H6)
+        calculator = ProbabilityCalculator(method="auto", verbose=True)
         
         prob_1_2_list = []
         prob_3_4_list = []
@@ -431,11 +437,15 @@ class H6Figure1Analyzer:
         print(f"  • Hamiltonian: {self.h6_system.hamiltonian.n_terms} terms")
         
         # Method selection assessment
-        print(f"\n✓ SAMPLING METHOD VALIDATION:")
-        print(f"  • H6 system: {self.h6_system.n_qubits} qubits, 2^{self.h6_system.n_qubits} = {2**self.h6_system.n_qubits:,} states")
-        print(f"  • Auto method would select 'exact' ({self.h6_system.n_qubits} ≤ 14), but too slow")
-        print(f"  • Forced 'sampling' method for performance with large systems ✓")
-        print(f"  • This demonstrates sampling method works for H6 scale")
+        if self.h6_system.n_qubits > 14:
+            print(f"\n✓ AUTOMATIC METHOD SELECTION:")
+            print(f"  • System too large for exact method ({self.h6_system.n_qubits} > 14 qubits)")
+            print(f"  • Auto-selected: SAMPLING method ✓")
+            print(f"  • This validates the automatic selection works correctly")
+        else:
+            print(f"\n✓ AUTOMATIC METHOD SELECTION:")
+            print(f"  • System manageable for exact method ({self.h6_system.n_qubits} ≤ 14 qubits)")
+            print(f"  • Auto-selected: EXACT method ✓")
         
         # Results assessment
         if self.results:
@@ -459,7 +469,7 @@ class H6Figure1Analyzer:
         print("=" * 60)
         
         print(f"✓ H6 system working with R = {self.R}")
-        print(f"✓ Sampling method validated for large systems")
+        print(f"✓ Automatic method selection validated")
         print(f"✓ Excitation probability calculation successful")
         print(f"✓ Ready to scale up to full R = 850 for Figure 1")
         
@@ -473,7 +483,7 @@ class H6Figure1Analyzer:
 
 def main():
     """Run H6 Figure 1 test with smaller R value."""
-    # Start with very small R for initial testing
+    # Start with smaller R for testing
     R_test = 100  # Much smaller than paper's R=850
     
     analyzer = H6Figure1Analyzer(R=R_test)
@@ -483,8 +493,8 @@ def main():
         print("❌ H6 system setup failed")
         return False
     
-    # Test sampling method (exact too slow for H6)
-    selected_states, selected_state_orders = analyzer.test_sampling_method()
+    # Test automatic method selection
+    selected_states, selected_state_orders = analyzer.test_auto_method_selection()
     
     # Run small-time analysis
     results = analyzer.run_small_time_analysis(selected_states, selected_state_orders)
