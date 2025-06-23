@@ -38,6 +38,7 @@ from src import (
     LoweringLevel
 )
 from src.qsci_vm_analysis import create_vm_enabled_algorithm
+from src.probability_calculator import ProbabilityCalculator, H6FigureOneAnalyzer
 
 
 class H6MoleculeStudy:
@@ -158,6 +159,27 @@ class H6MoleculeStudy:
             hamiltonian.constant = -2.5
             return hamiltonian
     
+    def _create_fallback_h6_hamiltonian(self) -> Operator:
+        """Create simplified H6 Hamiltonian for faster testing."""
+        hamiltonian = Operator()
+        
+        # Add Z terms for all qubits
+        for i in range(12):
+            hamiltonian += Operator({pauli_label(f"Z{i}"): -0.5})
+        
+        # Add XX interactions along the chain
+        for i in range(0, 12, 2):  # Even indices (alpha spins)
+            for j in range(i+2, 12, 2):
+                hamiltonian += Operator({pauli_label(f"X{i} X{j}"): 0.1})
+        
+        # Add YY interactions
+        for i in range(1, 12, 2):  # Odd indices (beta spins)
+            for j in range(i+2, 12, 2):
+                hamiltonian += Operator({pauli_label(f"Y{i} Y{j}"): 0.1})
+        
+        hamiltonian.constant = -3.0
+        return hamiltonian
+    
     def _calculate_fci_ground_state(self, mole, mf):
         """Calculate FCI ground state energy and wavefunction for exact reference.
         
@@ -253,6 +275,244 @@ class H6MoleculeStudy:
             circuit.add_X_gate(i)
         
         return GeneralCircuitQuantumState(n_qubits, circuit)
+    
+    def classify_excitation_order(self, basis_state_idx: int) -> int:
+        """Classify excitation order of a computational basis state.
+        
+        Args:
+            basis_state_idx: Integer representation of basis state
+            
+        Returns:
+            Excitation order (0 for HF, 1 for single, etc.) or -1 if invalid
+        """
+        # Get the number of electrons and qubits from the active space
+        if hasattr(self, 'active_space') and self.active_space is not None:
+            n_electrons = self.active_space.n_active_ele
+            n_qubits = 2 * self.active_space.n_active_orb
+        else:
+            # Default for H6: 6 electrons in 12 spin orbitals
+            n_electrons = 6
+            n_qubits = 12
+        
+        # Check for correct number of electrons
+        if bin(basis_state_idx).count('1') != n_electrons:
+            return -1
+        
+        # Create HF state: electrons in first n_electrons positions
+        hf_state_idx = (1 << n_electrons) - 1
+        
+        # Find differing bits
+        diff = basis_state_idx ^ hf_state_idx
+        num_flips = bin(diff).count('1')
+        
+        # Each excitation causes two flips (particle-hole pair)
+        excitation_order = num_flips // 2
+        
+        return excitation_order
+    
+    def _evolve_exact(self, evolution_time: float) -> GeneralCircuitQuantumState:
+        """Evolve HF state using exact time evolution."""
+        # Create TE-QSCI with exact evolution
+        te_qsci = TimeEvolvedQSCI(
+            hamiltonian=self.hamiltonian,
+            sampler=None,  # No sampler needed for exact evolution
+            time_evolution_method="exact"
+        )
+        
+        # Evolve the state
+        evolved_state = te_qsci._create_time_evolved_state(
+            self.hartree_fock_state,
+            evolution_time
+        )
+        
+        return evolved_state
+    
+    def run_excitation_probability_analysis(self, R: int = 85, method: str = "auto") -> Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
+        """Run excitation probability analysis for H6 reproducing Figure 1 style analysis.
+        
+        Args:
+            R: Number of states to select at t=1
+            method: Probability calculation method ("exact", "sampling", "auto")
+            
+        Returns:
+            Tuple of (times, prob_1_2, prob_3_4, prob_higher) arrays
+        """
+        print(f"Running H6 excitation probability analysis with R={R}, method={method}...")
+        
+        # Create probability calculator
+        calculator = ProbabilityCalculator(method=method, verbose=True)
+        
+        # Get system parameters
+        if hasattr(self, 'active_space') and self.active_space is not None:
+            n_electrons = self.active_space.n_active_ele
+            n_qubits = 2 * self.active_space.n_active_orb
+        else:
+            n_electrons = 6
+            n_qubits = 12
+        
+        # Step 1: Pre-select R states with largest probabilities at t=1
+        print("Selecting top probability states at t=1...")
+        evolved_state_t1 = self._evolve_exact(1.0)
+        
+        selected_states, selected_state_orders = calculator.select_states_at_t1(
+            evolved_state_t1, n_electrons, n_qubits, R
+        )
+        
+        # Step 2: Time evolution analysis with dual method support
+        time_steps = np.linspace(0.0, 2.0, 30)  # Reasonable range for H6
+        
+        results_1_2 = []
+        results_3_4 = []
+        results_higher = []
+        
+        print("Time evolution progress:")
+        for i, t in enumerate(time_steps):
+            if i % 5 == 0:
+                print(f"  Progress: {i+1}/{len(time_steps)} (t = {t:.2f})")
+            
+            # Evolve state to time t
+            evolved_state = self._evolve_exact(t)
+            
+            # Calculate probabilities using chosen method
+            probabilities = calculator.calculate_probabilities(
+                evolved_state, selected_states, n_qubits
+            )
+            
+            # Calculate grouped probabilities for selected states
+            prob_1_2, prob_3_4, prob_higher = calculator.calculate_grouped_probabilities(
+                probabilities, selected_state_orders, selected_states
+            )
+            
+            results_1_2.append(prob_1_2)
+            results_3_4.append(prob_3_4)
+            results_higher.append(prob_higher)
+        
+        print("✓ Time evolution analysis completed")
+        
+        return (
+            time_steps,
+            np.array(results_1_2),
+            np.array(results_3_4), 
+            np.array(results_higher)
+        )
+    
+    def _calculate_grouped_probabilities(self, probabilities: np.ndarray, selected_state_orders: dict) -> Tuple[float, float, float]:
+        """Calculate averaged probabilities for grouped excitation orders.
+        
+        Args:
+            probabilities: Full probability array for all basis states
+            selected_state_orders: Dictionary mapping excitation order to list of state indices
+            
+        Returns:
+            Tuple of (prob_1_2, prob_3_4, prob_higher) for grouped orders
+        """
+        # Group 1: One/Two-electron excitations (orders 1,2)
+        group_1_2_indices = []
+        if 1 in selected_state_orders:
+            group_1_2_indices.extend(selected_state_orders[1])
+        if 2 in selected_state_orders:
+            group_1_2_indices.extend(selected_state_orders[2])
+        prob_1_2 = np.sum(probabilities[group_1_2_indices]) if group_1_2_indices else 0.0
+        
+        # Group 2: Three/Four-electron excitations (orders 3,4)
+        group_3_4_indices = []
+        if 3 in selected_state_orders:
+            group_3_4_indices.extend(selected_state_orders[3])
+        if 4 in selected_state_orders:
+            group_3_4_indices.extend(selected_state_orders[4])
+        prob_3_4 = np.sum(probabilities[group_3_4_indices]) if group_3_4_indices else 0.0
+        
+        # Group 3: Higher excitations (orders 5+)
+        group_higher_indices = []
+        for order, indices in selected_state_orders.items():
+            if order >= 5:
+                group_higher_indices.extend(indices)
+        prob_higher = np.sum(probabilities[group_higher_indices]) if group_higher_indices else 0.0
+        
+        return prob_1_2, prob_3_4, prob_higher
+    
+    def run_figure_one_reproduction(self, R: int = 850, method: str = "auto") -> Dict:
+        """Run complete Figure 1 reproduction analysis using the specialized analyzer.
+        
+        This method reproduces Figure 1 from the TE-QSCI paper with the exact
+        parameters specified: R=850 states, focus on small-t scaling regime.
+        
+        Args:
+            R: Number of states to select (paper uses R=850)
+            method: Probability calculation method ("exact", "sampling", "auto")
+            
+        Returns:
+            Dictionary containing all analysis results and metadata
+        """
+        print(f"=== H6 FIGURE 1 REPRODUCTION ===")
+        print(f"Parameters: R={R}, method={method}")
+        print(f"Paper reference: arXiv:2412.13839v2, Figure 1")
+        
+        # Create specialized analyzer
+        analyzer = H6FigureOneAnalyzer(
+            hamiltonian=self.hamiltonian,
+            hartree_fock_state=self.hartree_fock_state,
+            active_space=self.active_space,
+            method=method
+        )
+        
+        # Define time points with focus on small-t scaling regime
+        small_times = np.logspace(-2, 0, 25)  # 0.01 to 1.0 (scaling regime)
+        large_times = np.linspace(1.2, 3.0, 15)  # 1.2 to 3.0 (deviation regime)
+        time_points = np.concatenate([small_times, large_times])
+        time_points = np.sort(time_points)
+        
+        # Run complete analysis
+        results = analyzer.run_figure_one_analysis(R=R, time_points=time_points)
+        
+        # Add metadata for Figure 1
+        results['figure_info'] = {
+            'title': 'H6 Excitation Probabilities vs Time',
+            'paper_reference': 'arXiv:2412.13839v2, Figure 1',
+            'expected_scaling': {
+                'group_1_2': 't^2 (small t)',
+                'group_3_4': 't^4 (small t)', 
+                'group_5_6': 't^6 (small t)'
+            },
+            'deviation_point': 't ≈ 1 (perturbative series breakdown)'
+        }
+        
+        return results
+    
+    def analyze_scaling_behavior(self, times: np.ndarray, prob_1_2: np.ndarray, 
+                                prob_3_4: np.ndarray, prob_higher: np.ndarray):
+        """Analyze scaling behavior for small t < 1."""
+        print("\nAnalyzing scaling behavior for small t < 1:")
+        
+        # Select small time regime
+        small_t_mask = (times > 0.05) & (times < 1.0)  # Avoid t=0 and t≥1
+        small_times = times[small_t_mask]
+        
+        datasets = [
+            (prob_1_2[small_t_mask], "One/Two-electron", 2),
+            (prob_3_4[small_t_mask], "Three/Four-electron", 4),
+            (prob_higher[small_t_mask], "Higher-electron", 6)
+        ]
+        
+        for probs, name, expected_power in datasets:
+            # Only analyze if we have non-zero probabilities
+            nonzero_mask = probs > 1e-12
+            if np.sum(nonzero_mask) < 5:  # Need enough points
+                print(f"  {name}: Insufficient non-zero data points")
+                continue
+            
+            times_fit = small_times[nonzero_mask]
+            probs_fit = probs[nonzero_mask]
+            
+            # Log-log fit to determine scaling: log(P) = n*log(t) + log(C)
+            log_t = np.log(times_fit)
+            log_p = np.log(probs_fit)
+            
+            try:
+                slope, intercept = np.polyfit(log_t, log_p, 1)
+                print(f"  {name}: P ∝ t^{slope:.2f} (expected: t^{expected_power})")
+            except:
+                print(f"  {name}: Scaling fit failed")
     
     def run_single_time_te_qsci_vs_time(self) -> Tuple[np.ndarray, np.ndarray, np.ndarray]:
         """Run single-time TE-QSCI for different evolution times (Fig. 1).
@@ -531,15 +791,16 @@ class H6MoleculeStudy:
         time_evolution_data: Tuple[np.ndarray, np.ndarray, np.ndarray],
         subspace_results: Dict[int, float],
         comparison_results: Dict[str, float],
-        architecture_results: Dict[str, Dict]
+        architecture_results: Dict[str, Dict],
+        excitation_data: Optional[Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]] = None
     ):
         """Plot results reproducing paper figures and tables."""
         
         # Figure 1: Energy and probability vs evolution time
-        plt.figure(figsize=(15, 12))
+        plt.figure(figsize=(18, 12))
         
         # Figure 1a: Energy vs evolution time
-        plt.subplot(2, 3, 1)
+        plt.subplot(3, 3, 1)
         times, energies, probabilities = time_evolution_data
         plt.plot(times, energies, 'bo-', label='TE-QSCI')
         plt.axhline(y=self.fci_energy, color='r', linestyle='--', 
@@ -552,8 +813,27 @@ class H6MoleculeStudy:
         plt.legend()
         plt.grid(True)
         
-        # Figure 1b: Probability P vs evolution time (key missing feature!)
-        plt.subplot(2, 3, 2)
+        # Figure 1b: Excitation Probabilities vs Time (reproducing Figure 1 style)
+        plt.subplot(3, 3, 2)
+        if excitation_data is not None:
+            exc_times, prob_1_2, prob_3_4, prob_higher = excitation_data
+            plt.plot(exc_times, prob_1_2, 'b-', linewidth=2, label='One/Two-electron')
+            plt.plot(exc_times, prob_3_4, 'r--', linewidth=2, label='Three/Four-electron') 
+            plt.plot(exc_times, prob_higher, 'g:', linewidth=2, label='Higher excitations')
+            plt.axvline(x=1.0, color='gray', linestyle='-.', alpha=0.7, label='t = 1')
+        else:
+            # Show placeholder when no data available
+            demo_times = np.linspace(0.0, 2.0, 30)
+            plt.plot(demo_times, demo_times**2 * 0.01, 'b-', alpha=0.5, label='t² scaling demo')
+            plt.plot(demo_times, demo_times**4 * 0.0001, 'r--', alpha=0.5, label='t⁴ scaling demo')
+        plt.xlabel('Evolution time t')
+        plt.ylabel('Probability P_μ(t)')
+        plt.title('Fig. 1: H6 Excitation Probabilities')
+        plt.legend(fontsize=9)
+        plt.grid(True)
+        
+        # Figure 1c: Original TE-QSCI ground state overlap
+        plt.subplot(3, 3, 3)
         if len(times) > 0 and len(probabilities) > 0:
             plt.plot(times, probabilities, 'go-', label='P(ground state)')
         else:
@@ -562,13 +842,13 @@ class H6MoleculeStudy:
             demo_probs = 0.1 + 0.3 * np.sin(demo_times) * np.exp(-demo_times/2)
             plt.plot(demo_times, demo_probs, 'go--', alpha=0.5, label='P(ground state) - Demo')
         plt.xlabel('Evolution time t')
-        plt.ylabel('Probability P')
-        plt.title('Fig. 1b: Ground State Probability vs Time')
+        plt.ylabel('Ground State Overlap')
+        plt.title('Original: Ground State vs Time')
         plt.legend()
         plt.grid(True)
         
         # Table II equivalent: Subspace dimension study
-        plt.subplot(2, 3, 3)
+        plt.subplot(3, 3, 4)
         R_values = list(subspace_results.keys())
         energies_R = list(subspace_results.values())
         errors_R = [max(1e-8, e - self.exact_ground_state_energy) for e in energies_R]  # Variational error (positive)
@@ -581,7 +861,7 @@ class H6MoleculeStudy:
         plt.legend()
         
         # Table III equivalent: Method comparison
-        plt.subplot(2, 3, 4)
+        plt.subplot(3, 3, 5)
         methods = list(comparison_results.keys())
         method_energies = list(comparison_results.values())
         correlation_percentages = []
@@ -597,7 +877,7 @@ class H6MoleculeStudy:
         plt.grid(True)
         
         # Figure 2 equivalent: Architecture analysis
-        plt.subplot(2, 3, 5)
+        plt.subplot(3, 3, 6)
         if architecture_results:
             arch_names = list(architecture_results.keys())
             latencies = [architecture_results[name]["total_latency_us"] 
@@ -607,6 +887,66 @@ class H6MoleculeStudy:
             plt.ylabel('Total latency (μs)')
             plt.title('Fig. 2: Architecture Analysis')
             plt.xticks(rotation=45)
+        
+        # Scaling analysis plots
+        if excitation_data is not None:
+            exc_times, prob_1_2, prob_3_4, prob_higher = excitation_data
+            
+            # Log-log plot for scaling analysis
+            plt.subplot(3, 3, 7)
+            small_t_mask = (exc_times > 0.05) & (exc_times < 1.0)
+            if np.sum(small_t_mask) > 5:
+                small_times = exc_times[small_t_mask]
+                
+                # Plot only non-zero probabilities on log scale
+                if np.any(prob_1_2[small_t_mask] > 1e-12):
+                    nonzero_mask = prob_1_2[small_t_mask] > 1e-12
+                    plt.loglog(small_times[nonzero_mask], prob_1_2[small_t_mask][nonzero_mask], 'b-', label='Orders 1-2')
+                
+                if np.any(prob_3_4[small_t_mask] > 1e-12):
+                    nonzero_mask = prob_3_4[small_t_mask] > 1e-12
+                    plt.loglog(small_times[nonzero_mask], prob_3_4[small_t_mask][nonzero_mask], 'r--', label='Orders 3-4')
+                
+                if np.any(prob_higher[small_t_mask] > 1e-12):
+                    nonzero_mask = prob_higher[small_t_mask] > 1e-12
+                    plt.loglog(small_times[nonzero_mask], prob_higher[small_t_mask][nonzero_mask], 'g:', label='Higher')
+                
+                # Add reference lines
+                ref_times = np.linspace(0.1, 1.0, 10)
+                plt.loglog(ref_times, 0.01 * ref_times**2, 'k:', alpha=0.5, label='t²')
+                plt.loglog(ref_times, 0.0001 * ref_times**4, 'k--', alpha=0.5, label='t⁴')
+                
+            plt.xlabel('Time t')
+            plt.ylabel('Probability P_μ(t)')
+            plt.title('Scaling Analysis (log-log)')
+            plt.legend(fontsize=8)
+            plt.grid(True)
+            
+            # Print scaling analysis
+            plt.subplot(3, 3, 8)
+            plt.text(0.1, 0.8, "Scaling Analysis Results:", fontsize=12, fontweight='bold', transform=plt.gca().transAxes)
+            
+            # Analyze scaling behavior and display results
+            if hasattr(self, 'analyze_scaling_behavior'):
+                # Capture scaling analysis output
+                import io
+                import sys
+                old_stdout = sys.stdout
+                sys.stdout = buffer = io.StringIO()
+                
+                try:
+                    self.analyze_scaling_behavior(exc_times, prob_1_2, prob_3_4, prob_higher)
+                    scaling_text = buffer.getvalue()
+                    sys.stdout = old_stdout
+                    
+                    # Display scaling results
+                    plt.text(0.1, 0.1, scaling_text, fontsize=9, transform=plt.gca().transAxes, 
+                            verticalalignment='bottom', fontfamily='monospace')
+                except:
+                    sys.stdout = old_stdout
+                    plt.text(0.1, 0.5, "Scaling analysis not available", fontsize=10, transform=plt.gca().transAxes)
+            
+            plt.axis('off')
         
         plt.tight_layout()
         plt.savefig('/Users/nez0b/Code/Quantum/qunasys/te-qsci/h6_results.png', 
@@ -707,12 +1047,18 @@ class H6MoleculeStudy:
         exact_vs_trotter_results = self.run_exact_vs_trotter_comparison()
         architecture_results = self.run_architecture_analysis()
         
+        # Run excitation probability analysis (Figure 1 style)
+        print("\n" + "="*60)
+        print("EXCITATION PROBABILITY ANALYSIS")
+        print("="*60)
+        excitation_data = self.run_excitation_probability_analysis(R=85)
+        
         # Print results
         self.print_summary_tables(subspace_results, comparison_results, architecture_results)
         self.print_exact_vs_trotter_table(exact_vs_trotter_results)
         
         # Plot results
-        self.plot_results(time_data, subspace_results, comparison_results, architecture_results)
+        self.plot_results(time_data, subspace_results, comparison_results, architecture_results, excitation_data)
         
         print("\nStudy completed! Results saved to h6_results.png")
 
