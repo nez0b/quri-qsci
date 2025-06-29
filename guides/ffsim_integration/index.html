@@ -12,26 +12,28 @@
         <meta name="author" content="QSCI Development Team">
       
       
-        <link rel="canonical" href="https://nez0b.github.io/quri-qsci/">
+        <link rel="canonical" href="https://nez0b.github.io/quri-qsci/guides/ffsim_integration/">
       
       
+        <link rel="prev" href="../../quickstart/">
       
-        <link rel="next" href="overview/">
+      
+        <link rel="next" href="getting_started/">
       
       
-      <link rel="icon" href="assets/images/favicon.png">
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
     
     
       
-        <title>QSCI - Quantum Selected Configuration Interaction</title>
+        <title>Overview - QSCI - Quantum Selected Configuration Interaction</title>
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.342714a4.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.342714a4.min.css">
       
         
-        <link rel="stylesheet" href="assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -50,13 +52,13 @@
       
     
     
-      <link rel="stylesheet" href="assets/_mkdocstrings.css">
+      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
     
-      <link rel="stylesheet" href="stylesheets/extra.css">
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
     
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
     
-    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -82,7 +84,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#qsci-quantum-selected-configuration-interaction" class="md-skip">
+        <a href="#ffsim-integration-overview" class="md-skip">
           Skip to content
         </a>
       
@@ -98,7 +100,7 @@
 
 <header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="." title="QSCI - Quantum Selected Configuration Interaction" class="md-header__button md-logo" aria-label="QSCI - Quantum Selected Configuration Interaction" data-md-component="logo">
+    <a href="../.." title="QSCI - Quantum Selected Configuration Interaction" class="md-header__button md-logo" aria-label="QSCI - Quantum Selected Configuration Interaction" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -118,7 +120,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Home
+              Overview
             
           </span>
         </div>
@@ -238,11 +240,9 @@
   
   
   
-    
   
-  
-    <li class="md-tabs__item md-tabs__item--active">
-      <a href="." class="md-tabs__link">
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
         
   
   
@@ -261,7 +261,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="overview/" class="md-tabs__link">
+      <a href="../../overview/" class="md-tabs__link">
         
   
   
@@ -278,11 +278,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="guides/ffsim_integration/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
           
   
   
@@ -302,7 +304,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="examples/" class="md-tabs__link">
+        <a href="../../examples/" class="md-tabs__link">
           
   
   
@@ -322,7 +324,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="testing/strategy/" class="md-tabs__link">
+        <a href="../../testing/strategy/" class="md-tabs__link">
           
   
   
@@ -342,7 +344,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="api/" class="md-tabs__link">
+        <a href="../../api/" class="md-tabs__link">
           
   
   
@@ -362,7 +364,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="design/" class="md-tabs__link">
+        <a href="../../design/" class="md-tabs__link">
           
   
   
@@ -402,7 +404,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="." title="QSCI - Quantum Selected Configuration Interaction" class="md-nav__button md-logo" aria-label="QSCI - Quantum Selected Configuration Interaction" data-md-component="logo">
+    <a href="../.." title="QSCI - Quantum Selected Configuration Interaction" class="md-nav__button md-logo" aria-label="QSCI - Quantum Selected Configuration Interaction" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -429,32 +431,10 @@
       
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    Home
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="." class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
         
   
   
@@ -465,209 +445,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#what-is-qsci" class="md-nav__link">
-    <span class="md-ellipsis">
-      What is QSCI?
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#key-features" class="md-nav__link">
-    <span class="md-ellipsis">
-      Key Features
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#algorithm-variants" class="md-nav__link">
-    <span class="md-ellipsis">
-      Algorithm Variants
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Algorithm Variants">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#vanillaqsci" class="md-nav__link">
-    <span class="md-ellipsis">
-      VanillaQSCI
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#singletimete_qsci" class="md-nav__link">
-    <span class="md-ellipsis">
-      SingleTimeTE_QSCI
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#timeaveragete_qsci" class="md-nav__link">
-    <span class="md-ellipsis">
-      TimeAverageTE_QSCI
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#statevectorte_qsci" class="md-nav__link">
-    <span class="md-ellipsis">
-      StateVectorTE_QSCI
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#key-innovations" class="md-nav__link">
-    <span class="md-ellipsis">
-      Key Innovations
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Key Innovations">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#uniform-superposition-breakthrough" class="md-nav__link">
-    <span class="md-ellipsis">
-      Uniform Superposition Breakthrough
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#time-evolution-integration" class="md-nav__link">
-    <span class="md-ellipsis">
-      Time Evolution Integration
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#comprehensive-validation" class="md-nav__link">
-    <span class="md-ellipsis">
-      Comprehensive Validation
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#scientific-background" class="md-nav__link">
-    <span class="md-ellipsis">
-      Scientific Background
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#getting-started" class="md-nav__link">
-    <span class="md-ellipsis">
-      Getting Started
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#api-reference" class="md-nav__link">
-    <span class="md-ellipsis">
-      API Reference
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#project-status" class="md-nav__link">
-    <span class="md-ellipsis">
-      Project Status
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#research-applications" class="md-nav__link">
-    <span class="md-ellipsis">
-      Research Applications
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#contributing" class="md-nav__link">
-    <span class="md-ellipsis">
-      Contributing
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#citation" class="md-nav__link">
-    <span class="md-ellipsis">
-      Citation
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#license" class="md-nav__link">
-    <span class="md-ellipsis">
-      License
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -698,7 +475,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="overview/" class="md-nav__link ">
+            <a href="../../overview/" class="md-nav__link ">
               
   
   
@@ -731,7 +508,7 @@
   
   
     <li class="md-nav__item">
-      <a href="installation/" class="md-nav__link">
+      <a href="../../installation/" class="md-nav__link">
         
   
   
@@ -754,7 +531,7 @@
   
   
     <li class="md-nav__item">
-      <a href="quickstart/" class="md-nav__link">
+      <a href="../../quickstart/" class="md-nav__link">
         
   
   
@@ -781,28 +558,31 @@
       
   
   
+    
   
   
+  
     
     
     
     
+      
+        
+        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
-        
-          
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
             
   
   
@@ -815,7 +595,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             ffsim Integration
@@ -826,10 +606,32 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="guides/ffsim_integration/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -840,6 +642,131 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why-use-ffsim-with-qsci" class="md-nav__link">
+    <span class="md-ellipsis">
+      Why Use ffsim with QSCI?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-benefits" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Benefits
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#module-components" class="md-nav__link">
+    <span class="md-ellipsis">
+      Module Components
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Module Components">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#molecular-systems-molecular_systemspy" class="md-nav__link">
+    <span class="md-ellipsis">
+      🧪 Molecular Systems (molecular_systems.py)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ansatz-creation-integrationpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔬 Ansatz Creation (integration.py)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#state-conversion-state_conversionpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔄 State Conversion (state_conversion.py)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#high-level-interface-qsci_interfacepy" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎯 High-Level Interface (qsci_interface.py)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Installation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quick-start" class="md-nav__link">
+    <span class="md-ellipsis">
+      Quick Start
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#next-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      Next Steps
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#support" class="md-nav__link">
+    <span class="md-ellipsis">
+      Support
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -852,7 +779,7 @@
   
   
     <li class="md-nav__item">
-      <a href="guides/ffsim_integration/getting_started/" class="md-nav__link">
+      <a href="getting_started/" class="md-nav__link">
         
   
   
@@ -875,7 +802,7 @@
   
   
     <li class="md-nav__item">
-      <a href="guides/ffsim_integration/molecular_systems/" class="md-nav__link">
+      <a href="molecular_systems/" class="md-nav__link">
         
   
   
@@ -898,7 +825,7 @@
   
   
     <li class="md-nav__item">
-      <a href="guides/ffsim_integration/ansatz_creation/" class="md-nav__link">
+      <a href="ansatz_creation/" class="md-nav__link">
         
   
   
@@ -921,7 +848,7 @@
   
   
     <li class="md-nav__item">
-      <a href="guides/ffsim_integration/state_conversion/" class="md-nav__link">
+      <a href="state_conversion/" class="md-nav__link">
         
   
   
@@ -996,7 +923,7 @@
   
   
     <li class="md-nav__item">
-      <a href="examples/" class="md-nav__link">
+      <a href="../../examples/" class="md-nav__link">
         
   
   
@@ -1071,7 +998,7 @@
   
   
     <li class="md-nav__item">
-      <a href="testing/strategy/" class="md-nav__link">
+      <a href="../../testing/strategy/" class="md-nav__link">
         
   
   
@@ -1146,7 +1073,7 @@
   
   
     <li class="md-nav__item">
-      <a href="api/" class="md-nav__link">
+      <a href="../../api/" class="md-nav__link">
         
   
   
@@ -1169,7 +1096,7 @@
   
   
     <li class="md-nav__item">
-      <a href="api/ffsim_integration/" class="md-nav__link">
+      <a href="../../api/ffsim_integration/" class="md-nav__link">
         
   
   
@@ -1192,7 +1119,7 @@
   
   
     <li class="md-nav__item">
-      <a href="api/" class="md-nav__link">
+      <a href="../../api/" class="md-nav__link">
         
   
   
@@ -1267,7 +1194,7 @@
   
   
     <li class="md-nav__item">
-      <a href="design/" class="md-nav__link">
+      <a href="../../design/" class="md-nav__link">
         
   
   
@@ -1317,64 +1244,64 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#what-is-qsci" class="md-nav__link">
+  <a href="#why-use-ffsim-with-qsci" class="md-nav__link">
     <span class="md-ellipsis">
-      What is QSCI?
+      Why Use ffsim with QSCI?
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#key-features" class="md-nav__link">
+  <a href="#key-benefits" class="md-nav__link">
     <span class="md-ellipsis">
-      Key Features
+      Key Benefits
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#algorithm-variants" class="md-nav__link">
+  <a href="#module-components" class="md-nav__link">
     <span class="md-ellipsis">
-      Algorithm Variants
+      Module Components
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Algorithm Variants">
+    <nav class="md-nav" aria-label="Module Components">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#vanillaqsci" class="md-nav__link">
+  <a href="#molecular-systems-molecular_systemspy" class="md-nav__link">
     <span class="md-ellipsis">
-      VanillaQSCI
+      🧪 Molecular Systems (molecular_systems.py)
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#singletimete_qsci" class="md-nav__link">
+  <a href="#ansatz-creation-integrationpy" class="md-nav__link">
     <span class="md-ellipsis">
-      SingleTimeTE_QSCI
+      🔬 Ansatz Creation (integration.py)
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#timeaveragete_qsci" class="md-nav__link">
+  <a href="#state-conversion-state_conversionpy" class="md-nav__link">
     <span class="md-ellipsis">
-      TimeAverageTE_QSCI
+      🔄 State Conversion (state_conversion.py)
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#statevectorte_qsci" class="md-nav__link">
+  <a href="#high-level-interface-qsci_interfacepy" class="md-nav__link">
     <span class="md-ellipsis">
-      StateVectorTE_QSCI
+      🎯 High-Level Interface (qsci_interface.py)
     </span>
   </a>
   
@@ -1386,114 +1313,36 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#key-innovations" class="md-nav__link">
+  <a href="#installation" class="md-nav__link">
     <span class="md-ellipsis">
-      Key Innovations
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Key Innovations">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#uniform-superposition-breakthrough" class="md-nav__link">
-    <span class="md-ellipsis">
-      Uniform Superposition Breakthrough
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#time-evolution-integration" class="md-nav__link">
-    <span class="md-ellipsis">
-      Time Evolution Integration
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#comprehensive-validation" class="md-nav__link">
-    <span class="md-ellipsis">
-      Comprehensive Validation
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#scientific-background" class="md-nav__link">
-    <span class="md-ellipsis">
-      Scientific Background
+      Installation
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#getting-started" class="md-nav__link">
+  <a href="#quick-start" class="md-nav__link">
     <span class="md-ellipsis">
-      Getting Started
+      Quick Start
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#api-reference" class="md-nav__link">
+  <a href="#next-steps" class="md-nav__link">
     <span class="md-ellipsis">
-      API Reference
+      Next Steps
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#project-status" class="md-nav__link">
+  <a href="#support" class="md-nav__link">
     <span class="md-ellipsis">
-      Project Status
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#research-applications" class="md-nav__link">
-    <span class="md-ellipsis">
-      Research Applications
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#contributing" class="md-nav__link">
-    <span class="md-ellipsis">
-      Contributing
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#citation" class="md-nav__link">
-    <span class="md-ellipsis">
-      Citation
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#license" class="md-nav__link">
-    <span class="md-ellipsis">
-      License
+      Support
     </span>
   </a>
   
@@ -1518,91 +1367,72 @@
   
 
 
-<h1 id="qsci-quantum-selected-configuration-interaction">QSCI - Quantum Selected Configuration Interaction<a class="headerlink" href="#qsci-quantum-selected-configuration-interaction" title="Permanent link">&para;</a></h1>
-<p>Welcome to the comprehensive documentation for <strong>QSCI</strong> (Quantum Selected Configuration Interaction) and <strong>TE-QSCI</strong> (Time-Evolved QSCI) algorithms implemented using the QURI ecosystem.</p>
-<h2 id="what-is-qsci">What is QSCI?<a class="headerlink" href="#what-is-qsci" title="Permanent link">&para;</a></h2>
-<p>QSCI is a quantum algorithm for quantum chemistry that leverages time evolution to systematically explore electronic configurations without requiring variational optimization. This implementation provides multiple algorithm variants optimized for different use cases and quantum hardware architectures.</p>
-<h2 id="key-features">Key Features<a class="headerlink" href="#key-features" title="Permanent link">&para;</a></h2>
+<h1 id="ffsim-integration-overview">ffsim Integration Overview<a class="headerlink" href="#ffsim-integration-overview" title="Permanent link">&para;</a></h1>
+<p>The <code>ffsim_integration</code> module provides a powerful bridge between the <a href="https://github.com/qiskit-community/ffsim">ffsim</a> quantum simulation library and the QSCI (Quantum Selected Configuration Interaction) framework.</p>
+<h2 id="why-use-ffsim-with-qsci">Why Use ffsim with QSCI?<a class="headerlink" href="#why-use-ffsim-with-qsci" title="Permanent link">&para;</a></h2>
+<p>The integration combines the strengths of both frameworks:</p>
 <ul>
-<li><strong>Multiple Algorithm Variants</strong>: VanillaQSCI, SingleTimeTE_QSCI, TimeAverageTE_QSCI, and StateVectorTE_QSCI</li>
-<li><strong>QURI Ecosystem Integration</strong>: Full compatibility with QURI Parts, QURI Algo, and QURI VM</li>
-<li><strong>Time Evolution Methods</strong>: Support for both Trotter decomposition and exact unitary evolution</li>
-<li><strong>Quantum Hardware Analysis</strong>: Circuit resource estimation for different quantum architectures</li>
-<li><strong>Machine Precision Validation</strong>: Comprehensive testing achieving machine precision accuracy</li>
-<li><strong>Scientific Applications</strong>: Validated on molecular systems including H2 and H6 molecules</li>
+<li><strong>ffsim</strong>: Efficient fermionic quantum simulation with optimized state vector operations</li>
+<li><strong>QSCI</strong>: Selected configuration interaction methods for quantum chemistry problems</li>
+<li><strong>Unified Workflow</strong>: Seamless conversion between different state representations</li>
 </ul>
-<h2 id="algorithm-variants">Algorithm Variants<a class="headerlink" href="#algorithm-variants" title="Permanent link">&para;</a></h2>
-<h3 id="vanillaqsci">VanillaQSCI<a class="headerlink" href="#vanillaqsci" title="Permanent link">&para;</a></h3>
-<p>Standard QSCI algorithm using computational basis state sampling from quantum circuits.</p>
-<h3 id="singletimete_qsci">SingleTimeTE_QSCI<a class="headerlink" href="#singletimete_qsci" title="Permanent link">&para;</a></h3>
-<p>Time-evolved QSCI at a single evolution time point for systematic configuration exploration.</p>
-<h3 id="timeaveragete_qsci">TimeAverageTE_QSCI<a class="headerlink" href="#timeaveragete_qsci" title="Permanent link">&para;</a></h3>
-<p>Time-evolved QSCI averaged over multiple evolution times to improve sampling diversity.</p>
-<h3 id="statevectorte_qsci">StateVectorTE_QSCI<a class="headerlink" href="#statevectorte_qsci" title="Permanent link">&para;</a></h3>
-<p>Time-evolved QSCI with direct state vector calculation for exact simulation studies.</p>
-<h2 id="key-innovations">Key Innovations<a class="headerlink" href="#key-innovations" title="Permanent link">&para;</a></h2>
-<h3 id="uniform-superposition-breakthrough">Uniform Superposition Breakthrough<a class="headerlink" href="#uniform-superposition-breakthrough" title="Permanent link">&para;</a></h3>
-<p>Our testing framework discovered that <strong>uniform superposition states</strong> (H⊗H⊗...⊗H) combined with <strong>complete subspace coverage</strong> provides optimal QSCI performance, achieving machine precision accuracy (&lt; 1e-15).</p>
-<h3 id="time-evolution-integration">Time Evolution Integration<a class="headerlink" href="#time-evolution-integration" title="Permanent link">&para;</a></h3>
-<p>The implementation uses <code>quri_algo.circuit.time_evolution.trotter_time_evo.TrotterTimeEvolutionCircuitFactory</code> for efficient Trotter decomposition and quantum circuit generation.</p>
-<h3 id="comprehensive-validation">Comprehensive Validation<a class="headerlink" href="#comprehensive-validation" title="Permanent link">&para;</a></h3>
-<p>All QSCI variants are validated against exact diagonalization with 100% test success rate (41/41 tests passing), ensuring mathematical correctness and numerical stability.</p>
-<h2 id="scientific-background">Scientific Background<a class="headerlink" href="#scientific-background" title="Permanent link">&para;</a></h2>
-<p>TE-QSCI generates important electronic configurations through time evolution:</p>
-<div class="arithmatex">\[|\psi(t)\rangle = e^{-i\hat{H}t}|\psi_I\rangle = |\psi_I\rangle - i\hat{H}t|\psi_I\rangle + \frac{(-i\hat{H}t)^2}{2!}|\psi_I\rangle + \ldots\]</div>
-<p>Where the <span class="arithmatex">\(k\)</span>-th order term includes up to <span class="arithmatex">\(2k\)</span>-th order excitations, systematically exploring the configuration space needed for accurate quantum chemistry calculations.</p>
-<h2 id="getting-started">Getting Started<a class="headerlink" href="#getting-started" title="Permanent link">&para;</a></h2>
-<ol>
-<li><strong><a href="installation/">Installation Guide</a></strong> - Set up QSCI with all dependencies</li>
-<li><strong><a href="quickstart/">Quick Start</a></strong> - Run your first QSCI calculation  </li>
-<li><strong><a href="algorithms/overview.md">Algorithm Overview</a></strong> - Understand the different QSCI variants</li>
-<li><strong><a href="examples/basic_usage.md">Examples</a></strong> - Learn from practical examples</li>
-</ol>
-<h2 id="api-reference">API Reference<a class="headerlink" href="#api-reference" title="Permanent link">&para;</a></h2>
-<p>Explore the complete API documentation:</p>
-<ul>
-<li><strong><a href="api/qsci_algorithms/">Core Algorithms</a></strong> - VanillaQSCI, TimeEvolvedQSCI, and variants</li>
-<li><strong><a href="api/qsci_algo_interface/">Algorithm Interfaces</a></strong> - QURI-algo compatible interfaces  </li>
-<li><strong><a href="api/qsci_vm_analysis/">VM Analysis</a></strong> - Circuit analysis and resource estimation</li>
-</ul>
-<h2 id="project-status">Project Status<a class="headerlink" href="#project-status" title="Permanent link">&para;</a></h2>
-<p><strong>Status</strong>: Production Ready ✅</p>
-<ul>
-<li>✅ <strong>Complete Algorithm Suite</strong>: Vanilla QSCI and all TE-QSCI variants implemented</li>
-<li>✅ <strong>QURI Ecosystem Integration</strong>: Full compatibility with QURI Parts, QURI Algo, and QURI VM</li>
-<li>✅ <strong>Scientific Validation</strong>: H6 molecule study with 919-term Hamiltonian producing valid results</li>
-<li>✅ <strong>Performance Optimization</strong>: Efficient sparse matrix operations and concurrent sampling</li>
-<li>✅ <strong>Architecture Analysis</strong>: Circuit resource estimation for different quantum hardware topologies</li>
-<li>✅ <strong>Extensible Architecture</strong>: Modular design enabling easy addition of new features</li>
-</ul>
-<h2 id="research-applications">Research Applications<a class="headerlink" href="#research-applications" title="Permanent link">&para;</a></h2>
-<p>This implementation has been validated on:</p>
-<ul>
-<li><strong>H2 Molecule</strong>: Potential energy curve analysis</li>
-<li><strong>H6 Linear Chain</strong>: Complete study with STO-3G basis set  </li>
-<li><strong>TFIM Models</strong>: Transverse Field Ising Model at various field strengths</li>
-<li><strong>Heisenberg Models</strong>: XXZ Heisenberg model with different coupling parameters</li>
-<li><strong>Random Systems</strong>: Validation on random sparse Hamiltonians</li>
-</ul>
-<h2 id="contributing">Contributing<a class="headerlink" href="#contributing" title="Permanent link">&para;</a></h2>
-<p>We welcome contributions! Please see our <a href="contributing/">Contributing Guide</a> for details on:</p>
-<ul>
-<li>Adding new QSCI variants</li>
-<li>Extending the testing framework</li>
-<li>Improving documentation</li>
-<li>Reporting issues</li>
-</ul>
-<h2 id="citation">Citation<a class="headerlink" href="#citation" title="Permanent link">&para;</a></h2>
-<p>If you use QSCI in your research, please cite:</p>
-<div class="language-bibtex highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nc">@article</span><span class="p">{</span><span class="nl">qsci2024</span><span class="p">,</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="na">title</span><span class="p">=</span><span class="s">{Time-Evolved Quantum Selected Configuration Interaction}</span><span class="p">,</span>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="na">author</span><span class="p">=</span><span class="s">{QSCI Development Team}</span><span class="p">,</span>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">  </span><span class="na">journal</span><span class="p">=</span><span class="s">{arXiv preprint}</span><span class="p">,</span>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">  </span><span class="na">year</span><span class="p">=</span><span class="s">{2024}</span>
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="p">}</span>
+<h2 id="key-benefits">Key Benefits<a class="headerlink" href="#key-benefits" title="Permanent link">&para;</a></h2>
+<p>✅ <strong>Efficient Ansatz Creation</strong>: Generate LUCJ and UCJ ansatz states using ffsim's optimized routines<br />
+✅ <strong>Flexible State Conversion</strong>: Convert between ffsim and QURI Parts state formats<br />
+✅ <strong>Molecular System Support</strong>: Built-in support for H₂ and N₂ molecules<br />
+✅ <strong>QSCI Integration</strong>: Direct integration with QSCI algorithms for enhanced performance  </p>
+<h2 id="module-components">Module Components<a class="headerlink" href="#module-components" title="Permanent link">&para;</a></h2>
+<p>The <code>ffsim_integration</code> module consists of four main components:</p>
+<h3 id="molecular-systems-molecular_systemspy">🧪 Molecular Systems (<code>molecular_systems.py</code>)<a class="headerlink" href="#molecular-systems-molecular_systemspy" title="Permanent link">&para;</a></h3>
+<p>Create and configure molecular systems for quantum chemistry calculations:
+- H₂ molecule creation with customizable parameters
+- N₂ molecule setup with active space configuration
+- Hartree-Fock and FCI reference energy calculations</p>
+<h3 id="ansatz-creation-integrationpy">🔬 Ansatz Creation (<code>integration.py</code>)<a class="headerlink" href="#ansatz-creation-integrationpy" title="Permanent link">&para;</a></h3>
+<p>Generate variational quantum ansatz states:
+- <strong>LUCJ (Linear Unitary Coupled Cluster Jastrow)</strong>: Efficient parameterized ansatz
+- <strong>UCJ (Unitary Coupled Cluster Jastrow)</strong>: Full unitary coupled cluster approach
+- Parameter optimization and energy minimization</p>
+<h3 id="state-conversion-state_conversionpy">🔄 State Conversion (<code>state_conversion.py</code>)<a class="headerlink" href="#state-conversion-state_conversionpy" title="Permanent link">&para;</a></h3>
+<p>Convert between different quantum state representations:
+- ffsim fermionic states ↔ QURI Parts computational basis
+- Jordan-Wigner mapping with proper qubit ordering
+- Fidelity and overlap calculations</p>
+<h3 id="high-level-interface-qsci_interfacepy">🎯 High-Level Interface (<code>qsci_interface.py</code>)<a class="headerlink" href="#high-level-interface-qsci_interfacepy" title="Permanent link">&para;</a></h3>
+<p>Complete workflow orchestration:
+- End-to-end LUCJ + QSCI pipelines
+- Automated molecule → ansatz → QSCI workflows
+- Performance benchmarking and result analysis</p>
+<h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h2>
+<p>The ffsim integration is available as an optional dependency:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>pip<span class="w"> </span>install<span class="w"> </span>quri-qsci<span class="o">[</span>ffsim<span class="o">]</span>
 </span></code></pre></div>
-<h2 id="license">License<a class="headerlink" href="#license" title="Permanent link">&para;</a></h2>
-<p>This project is licensed under the MIT License - see the <a href="license/">License</a> file for details.</p>
+<h2 id="quick-start">Quick Start<a class="headerlink" href="#quick-start" title="Permanent link">&para;</a></h2>
+<p>Here's a simple example to get you started:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">ffsim_integration.molecular_systems</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_h2_molecule</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">ffsim_integration.integration</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_lucj_ansatz</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="c1"># Create H₂ molecule</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="n">h2</span> <span class="o">=</span> <span class="n">create_h2_molecule</span><span class="p">(</span><span class="n">basis</span><span class="o">=</span><span class="s2">&quot;sto-3g&quot;</span><span class="p">,</span> <span class="n">bond_length</span><span class="o">=</span><span class="mf">0.74</span><span class="p">)</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="c1"># Generate LUCJ ansatz</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="n">lucj_result</span> <span class="o">=</span> <span class="n">create_lucj_ansatz</span><span class="p">(</span><span class="n">h2</span><span class="p">,</span> <span class="n">n_reps</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_iterations</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;LUCJ energy: </span><span class="si">{</span><span class="n">lucj_result</span><span class="o">.</span><span class="n">final_energy</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2"> Ha&quot;</span><span class="p">)</span>
+</span></code></pre></div>
+<h2 id="next-steps">Next Steps<a class="headerlink" href="#next-steps" title="Permanent link">&para;</a></h2>
+<ul>
+<li>📚 <strong><a href="getting_started/">Getting Started</a></strong>: Complete tutorial with working examples</li>
+<li>🧪 <strong><a href="molecular_systems/">Molecular Systems</a></strong>: Detailed guide to molecule creation</li>
+<li>🔬 <strong><a href="ansatz_creation/">Ansatz Creation</a></strong>: Understanding LUCJ and UCJ methods</li>
+<li>🔄 <strong><a href="state_conversion/">State Conversion</a></strong>: Working with different state formats</li>
+<li>📖 <strong><a href="../../api/ffsim_integration/">API Reference</a></strong>: Complete function documentation</li>
+</ul>
+<h2 id="support">Support<a class="headerlink" href="#support" title="Permanent link">&para;</a></h2>
+<p>For questions and issues related to the ffsim integration:
+- Check the <a href="../../api/ffsim_integration/">API documentation</a> for detailed function references
+- Review the example notebooks in the <code>examples/ffsim_integration/</code> directory
+- Report issues on the <a href="https://github.com/nez0b/quri-qsci">GitHub repository</a></p>
 
 
 
@@ -1687,12 +1517,12 @@
     
     
       
-      <script id="__config" type="application/json">{"base": ".", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "navigation.path", "navigation.top", "search.highlight", "search.suggest", "search.share", "toc.follow", "content.code.copy", "content.code.select", "content.code.annotate"], "search": "assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "navigation.path", "navigation.top", "search.highlight", "search.suggest", "search.share", "toc.follow", "content.code.copy", "content.code.select", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="assets/javascripts/bundle.13a4f30d.min.js"></script>
+      <script src="../../assets/javascripts/bundle.13a4f30d.min.js"></script>
       
-        <script src="javascripts/katex.js"></script>
+        <script src="../../javascripts/katex.js"></script>
       
         <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
       

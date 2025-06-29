@@ -1,19 +1,19 @@
 /* Custom styles for QSCI documentation */
 
-/* Custom color scheme - Primary color #42f5c2 */
+/* Custom color scheme - Primary color #3dbf9a */
 :root {
-  --md-primary-fg-color: #42f5c2;
-  --md-primary-fg-color--light: #6bf7d1;
-  --md-primary-fg-color--dark: #2ec99f;
+  --md-primary-fg-color: #3dbf9a;
+  --md-primary-fg-color--light: #8bd9c3;
+  --md-primary-fg-color--dark: #2c8f74;
   --md-primary-bg-color: #ffffff;
   --md-accent-fg-color: #26a69a;
 }
 
 /* Dark mode adjustments for custom colors */
 [data-md-color-scheme="slate"] {
-  --md-primary-fg-color: #42f5c2;
-  --md-primary-fg-color--light: #6bf7d1;
-  --md-primary-fg-color--dark: #2ec99f;
+  --md-primary-fg-color: #3dbf9a;
+  --md-primary-fg-color--light: #8bd9c3;
+  --md-primary-fg-color--dark: #2c8f74;
   --md-primary-bg-color: #1e1e1e;
 }
 
