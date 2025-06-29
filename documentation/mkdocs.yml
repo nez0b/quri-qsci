@@ -1,0 +1,177 @@
+site_name: QSCI - Quantum Selected Configuration Interaction
+site_description: Comprehensive documentation for the QSCI and TE-QSCI quantum algorithms
+site_author: QSCI Development Team
+site_url: https://qsci.readthedocs.io
+
+repo_name: QSCI/quri-qsci
+repo_url: https://github.com/QunaSys/quri-qsci
+edit_uri: edit/main/docs/
+
+copyright: Copyright &copy; 2024 QSCI Development Team
+
+theme:
+  name: material
+  palette:
+    # Palette toggle for automatic mode
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/brightness-auto
+        name: Switch to light mode
+
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: blue
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: blue
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to system preference
+
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.expand
+    - navigation.path
+    - navigation.top
+    - search.highlight
+    - search.suggest
+    - search.share
+    - toc.follow
+    - content.code.copy
+    - content.code.select
+    - content.code.annotate
+
+  icon:
+    repo: fontawesome/brands/github
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.details
+  - pymdownx.critic
+  - pymdownx.caret
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.tilde
+  - pymdownx.arithmatex:
+      generic: true
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - toc:
+      permalink: true
+  - tables
+
+plugins:
+  - search:
+      separator: '[\s\-,:!=\[\]()"`/]+|\.(?!\d)|&[lg]t;|(?!\b)(?=[A-Z][a-z])'
+  - gen-files:
+      scripts:
+        - scripts/gen_ref_pages.py
+  - literate-nav:
+      nav_file: SUMMARY.md
+  - section-index
+  - mkdocstrings:
+      handlers:
+        python:
+          options:
+            docstring_style: google
+            docstring_options:
+              ignore_init_summary: true
+            merge_init_into_class: true
+            show_submodules: false
+            show_source: true
+            show_root_heading: true
+            show_if_no_docstring: true
+            inherited_members: true
+            members_order: source
+            separate_signature: true
+            unwrap_annotated: true
+            filters: ["!^_"]
+            heading_level: 1
+            parameter_headings: true
+            show_symbol_type_heading: true
+            show_symbol_type_toc: true
+            signature_crossrefs: true
+            summary: true
+
+nav:
+  - Home: index.md
+  - Getting Started:
+    - overview.md
+    - Installation: installation.md
+    - Quick Start: quickstart.md
+  - User Guide:
+    - Algorithm Overview: algorithms/overview.md
+    - VanillaQSCI: algorithms/vanilla_qsci.md
+    - TE-QSCI Variants: algorithms/te_qsci.md
+    - Time Evolution: algorithms/time_evolution.md
+    - State Preparation: algorithms/state_preparation.md
+  - Examples:
+    - Overview: examples/index.md
+    - H2 Potential Curve: examples/h2_molecule.md
+    - H6 Figure 1 Analysis: examples/h6_molecule.md
+    - Basic Usage: examples/basic_usage.md
+    - Performance Analysis: examples/performance.md
+  - Testing:
+    - Testing Strategy: testing/strategy.md
+    - Exact Diagonalization: testing/exact_diagonalization.md
+    - Test Utilities: testing/utilities.md
+    - Contributing Tests: testing/contributing.md
+  - API Reference:
+    - Overview: api/index.md
+    - api/
+  - Design & Implementation:
+    - Overview: design/index.md
+    - Architecture: design/architecture.md
+    - QURI Integration: design/quri_integration.md
+    - Time Evolution Methods: design/time_evolution.md
+    - Performance Considerations: design/performance.md
+    - Future Extensions: design/future.md
+  - About:
+    - Changelog: changelog.md
+    - Contributing: contributing.md
+    - License: license.md
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/QunaSys/quri-qsci
+    - icon: fontawesome/brands/python
+      link: https://pypi.org/project/quri-qsci/
+
+extra_css:
+  - stylesheets/extra.css
+  - https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css
+
+extra_javascript:
+  - javascripts/katex.js
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js
+  - https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js
+
+watch:
+  - ../src

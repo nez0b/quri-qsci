@@ -59,7 +59,7 @@ class H2PotentialCurveStudy:
     
     def __init__(self):
         """Initialize the H2 potential curve study."""
-        self.bond_lengths = np.linspace(0.1, 3.0, 30)  # Full potential curve study
+        self.bond_lengths = np.linspace(0.5, 2.5, 15)  # Reduced range for demonstration
         self.results = {
             'bond_lengths': self.bond_lengths,
             'vqe_energies': [],
@@ -70,8 +70,8 @@ class H2PotentialCurveStudy:
         }
         
         # QSCI parameters
-        self.qsci_shots = 5000  # Adequate shots for accuracy
-        self.num_states_pick_out = 50  # Good for H2 system
+        self.qsci_shots = 2000  # Reduced shots for faster execution
+        self.num_states_pick_out = 32  # Reduced states for demonstration
         self.te_evolution_time = 1.0
         self.te_evolution_times = [0.5, 1.0, 1.5]
         
@@ -396,7 +396,11 @@ class H2PotentialCurveStudy:
         plt.tight_layout()
         
         if save_plot:
-            filename = '/Users/nez0b/Code/Quantum/qunasys/te-qsci/h2_potential_curve_comparison.png'
+            # Create figures directory if it doesn't exist
+            figures_dir = os.path.join(os.path.dirname(__file__), '..', 'figures')
+            os.makedirs(figures_dir, exist_ok=True)
+            
+            filename = os.path.join(figures_dir, 'h2_potential_curve_comparison.png')
             plt.savefig(filename, dpi=300, bbox_inches='tight')
             print(f"Plot saved to: {filename}")
         
@@ -404,7 +408,11 @@ class H2PotentialCurveStudy:
     
     def save_results(self, filename='h2_potential_curve_results.npz'):
         """Save results to file for later analysis."""
-        filepath = f'/Users/nez0b/Code/Quantum/qunasys/te-qsci/{filename}'
+        # Create figures directory if it doesn't exist
+        figures_dir = os.path.join(os.path.dirname(__file__), '..', 'figures')
+        os.makedirs(figures_dir, exist_ok=True)
+        
+        filepath = os.path.join(figures_dir, filename)
         np.savez(filepath, **self.results)
         print(f"Results saved to: {filepath}")
     
