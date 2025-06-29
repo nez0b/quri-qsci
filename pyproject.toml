@@ -45,3 +45,15 @@ examples = [
 all = [
     "quri-qsci[ffsim,dev,docs,examples]",
 ]
+
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+packages = ["ffsim_integration"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["ffsim_integration*"]

@@ -124,12 +124,19 @@ nav:
     - overview.md
     - Installation: installation.md
     - Quick Start: quickstart.md
+  - ffsim Integration:
+    - Overview: guides/ffsim_integration/index.md
+    - Getting Started: guides/ffsim_integration/getting_started.md
+    - Molecular Systems: guides/ffsim_integration/molecular_systems.md
+    - Ansatz Creation: guides/ffsim_integration/ansatz_creation.md
+    - State Conversion: guides/ffsim_integration/state_conversion.md
   - Examples:
     - Overview: examples/index.md
   - Testing:
     - Testing Strategy: testing/strategy.md
   - API Reference:
     - Overview: api/index.md
+    - ffsim Integration: api/ffsim_integration.md
     - api/
   - Design & Implementation:
     - Overview: design/index.md
