@@ -139,7 +139,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="teal"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
     
       <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
@@ -149,7 +149,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="indigo"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="teal"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
     
       <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
@@ -2660,7 +2660,15 @@ enabling seamless integration with QURI SDK ecosystem.</p>
 
 
 <a href="#qsci_algo_interface.Analysis" class="headerlink" title="Permanent link">&para;</a></h2>
-<div class="language-python doc-signature highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">Analysis</span><span class="p">(</span><span class="n"><span title="qsci_algo_interface.Analysis(lowering_level)">lowering_level</span></span><span class="p">,</span> <span class="n"><span title="qsci_algo_interface.Analysis(circuit_gate_count)">circuit_gate_count</span></span><span class="p">,</span> <span class="n"><span title="qsci_algo_interface.Analysis(circuit_depth)">circuit_depth</span></span><span class="p">,</span> <span class="n"><span title="qsci_algo_interface.Analysis(circuit_latency)">circuit_latency</span></span><span class="p">,</span> <span class="n"><span title="qsci_algo_interface.Analysis(circuit_execution_count)">circuit_execution_count</span></span><span class="p">,</span> <span class="n"><span title="qsci_algo_interface.Analysis(circuit_fidelities)">circuit_fidelities</span></span><span class="p">,</span> <span class="n"><span title="qsci_algo_interface.Analysis(circuit_qubit_count)">circuit_qubit_count</span></span><span class="p">)</span>
+<div class="language-python doc-signature highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">Analysis</span><span class="p">(</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="n"><span title="qsci_algo_interface.Analysis(lowering_level)">lowering_level</span></span><span class="p">,</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="n"><span title="qsci_algo_interface.Analysis(circuit_gate_count)">circuit_gate_count</span></span><span class="p">,</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="n"><span title="qsci_algo_interface.Analysis(circuit_depth)">circuit_depth</span></span><span class="p">,</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="n"><span title="qsci_algo_interface.Analysis(circuit_latency)">circuit_latency</span></span><span class="p">,</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    <span class="n"><span title="qsci_algo_interface.Analysis(circuit_execution_count)">circuit_execution_count</span></span><span class="p">,</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    <span class="n"><span title="qsci_algo_interface.Analysis(circuit_fidelities)">circuit_fidelities</span></span><span class="p">,</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    <span class="n"><span title="qsci_algo_interface.Analysis(circuit_qubit_count)">circuit_qubit_count</span></span><span class="p">,</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="p">)</span>
 </span></code></pre></div>
 
     <div class="doc doc-contents ">
@@ -3426,7 +3434,9 @@ enabling seamless integration with QURI SDK ecosystem.</p>
 
 
 <a href="#qsci_algo_interface.QSCIAlgorithmResult" class="headerlink" title="Permanent link">&para;</a></h2>
-<div class="language-python doc-signature highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">QSCIAlgorithmResult</span><span class="p">(</span><span class="n"><span title="qsci_algo_interface.QSCIAlgorithmResult(algorithm)">algorithm</span></span><span class="p">,</span> <span class="n"><span title="qsci_algo_interface.QSCIAlgorithmResult(qsci_result)">qsci_result</span></span><span class="p">,</span> <span class="n"><span title="qsci_algo_interface.QSCIAlgorithmResult(elapsed_time)">elapsed_time</span></span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<div class="language-python doc-signature highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">QSCIAlgorithmResult</span><span class="p">(</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="n"><span title="qsci_algo_interface.QSCIAlgorithmResult(algorithm)">algorithm</span></span><span class="p">,</span> <span class="n"><span title="qsci_algo_interface.QSCIAlgorithmResult(qsci_result)">qsci_result</span></span><span class="p">,</span> <span class="n"><span title="qsci_algo_interface.QSCIAlgorithmResult(elapsed_time)">elapsed_time</span></span><span class="o">=</span><span class="kc">None</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="p">)</span>
 </span></code></pre></div>
 
     <div class="doc doc-contents ">
@@ -3780,7 +3790,9 @@ enabling seamless integration with QURI SDK ecosystem.</p>
 
 
 <a href="#qsci_algo_interface.QSCIAnalysis" class="headerlink" title="Permanent link">&para;</a></h2>
-<div class="language-python doc-signature highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">QSCIAnalysis</span><span class="p">(</span><span class="n"><span title="qsci_algo_interface.QSCIAnalysis(lowering_level)">lowering_level</span></span><span class="p">,</span> <span class="n"><span title="qsci_algo_interface.QSCIAnalysis(qsci_result)">qsci_result</span></span><span class="p">,</span> <span class="n"><span title="qsci_algo_interface.QSCIAnalysis(circuit_analysis)">circuit_analysis</span></span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<div class="language-python doc-signature highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">QSCIAnalysis</span><span class="p">(</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="n"><span title="qsci_algo_interface.QSCIAnalysis(lowering_level)">lowering_level</span></span><span class="p">,</span> <span class="n"><span title="qsci_algo_interface.QSCIAnalysis(qsci_result)">qsci_result</span></span><span class="p">,</span> <span class="n"><span title="qsci_algo_interface.QSCIAnalysis(circuit_analysis)">circuit_analysis</span></span><span class="o">=</span><span class="kc">None</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="p">)</span>
 </span></code></pre></div>
 
     <div class="doc doc-contents ">
@@ -4271,7 +4283,9 @@ enabling seamless integration with QURI SDK ecosystem.</p>
 
 
 <a href="#qsci_algo_interface.QSCIAlgorithmBase" class="headerlink" title="Permanent link">&para;</a></h2>
-<div class="language-python doc-signature highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">QSCIAlgorithmBase</span><span class="p">(</span><span class="n"><span title="qsci_algo_interface.QSCIAlgorithmBase(hamiltonian)">hamiltonian</span></span><span class="p">,</span> <span class="n"><span title="qsci_algo_interface.QSCIAlgorithmBase(sampler)">sampler</span></span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n"><span title="qsci_algo_interface.QSCIAlgorithmBase(num_states_pick_out)">num_states_pick_out</span></span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<div class="language-python doc-signature highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">QSCIAlgorithmBase</span><span class="p">(</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="n"><span title="qsci_algo_interface.QSCIAlgorithmBase(hamiltonian)">hamiltonian</span></span><span class="p">,</span> <span class="n"><span title="qsci_algo_interface.QSCIAlgorithmBase(sampler)">sampler</span></span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n"><span title="qsci_algo_interface.QSCIAlgorithmBase(num_states_pick_out)">num_states_pick_out</span></span><span class="o">=</span><span class="kc">None</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="p">)</span>
 </span></code></pre></div>
 
     <div class="doc doc-contents ">
@@ -4534,13 +4548,18 @@ enabling seamless integration with QURI SDK ecosystem.</p>
 
 
 <a href="#qsci_algo_interface.QSCIAlgorithmBase.analyze" class="headerlink" title="Permanent link">&para;</a></h3>
-<div class="language-python doc-signature highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">analyze</span><span class="p">(</span><span class="n"><span title="qsci_algo_interface.QSCIAlgorithmBase.analyze(input_states)">input_states</span></span><span class="p">,</span> <span class="n"><span title="qsci_algo_interface.QSCIAlgorithmBase.analyze(total_shots)">total_shots</span></span><span class="p">,</span> <span class="n"><span title="qsci_algo_interface.QSCIAlgorithmBase.analyze(lowering_level)">lowering_level</span></span><span class="o">=</span><span class="n"><a class="autorefs autorefs-internal" title="            LogicalCircuit
+<div class="language-python doc-signature highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">analyze</span><span class="p">(</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="n"><span title="qsci_algo_interface.QSCIAlgorithmBase.analyze(input_states)">input_states</span></span><span class="p">,</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="n"><span title="qsci_algo_interface.QSCIAlgorithmBase.analyze(total_shots)">total_shots</span></span><span class="p">,</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="n"><span title="qsci_algo_interface.QSCIAlgorithmBase.analyze(lowering_level)">lowering_level</span></span><span class="o">=</span><span class="n"><a class="autorefs autorefs-internal" title="            LogicalCircuit
 
 
   
       class-attribute
       instance-attribute
-   (qsci_algo_interface.LoweringLevel.LogicalCircuit)" href="#qsci_algo_interface.LoweringLevel.LogicalCircuit">LogicalCircuit</a></span><span class="p">,</span> <span class="o">**</span><span class="n"><span title="qsci_algo_interface.QSCIAlgorithmBase.analyze(**kwargs)">kwargs</span></span><span class="p">)</span>
+   (qsci_algo_interface.LoweringLevel.LogicalCircuit)" href="#qsci_algo_interface.LoweringLevel.LogicalCircuit">LogicalCircuit</a></span><span class="p">,</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="o">**</span><span class="n"><span title="qsci_algo_interface.QSCIAlgorithmBase.analyze(**kwargs)">kwargs</span></span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="p">)</span>
 </span></code></pre></div>
 
     <div class="doc doc-contents ">
@@ -4679,7 +4698,9 @@ enabling seamless integration with QURI SDK ecosystem.</p>
 
 
 <a href="#qsci_algo_interface.VanillaQSCIAlgorithm" class="headerlink" title="Permanent link">&para;</a></h2>
-<div class="language-python doc-signature highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">VanillaQSCIAlgorithm</span><span class="p">(</span><span class="n"><span title="qsci_algo_interface.VanillaQSCIAlgorithm(hamiltonian)">hamiltonian</span></span><span class="p">,</span> <span class="n"><span title="qsci_algo_interface.VanillaQSCIAlgorithm(sampler)">sampler</span></span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n"><span title="qsci_algo_interface.VanillaQSCIAlgorithm(num_states_pick_out)">num_states_pick_out</span></span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<div class="language-python doc-signature highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">VanillaQSCIAlgorithm</span><span class="p">(</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="n"><span title="qsci_algo_interface.VanillaQSCIAlgorithm(hamiltonian)">hamiltonian</span></span><span class="p">,</span> <span class="n"><span title="qsci_algo_interface.VanillaQSCIAlgorithm(sampler)">sampler</span></span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n"><span title="qsci_algo_interface.VanillaQSCIAlgorithm(num_states_pick_out)">num_states_pick_out</span></span><span class="o">=</span><span class="kc">None</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="p">)</span>
 </span></code></pre></div>
 
     <div class="doc doc-contents ">
@@ -4984,13 +5005,18 @@ enabling seamless integration with QURI SDK ecosystem.</p>
 
 
 <a href="#qsci_algo_interface.VanillaQSCIAlgorithm.analyze" class="headerlink" title="Permanent link">&para;</a></h3>
-<div class="language-python doc-signature highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">analyze</span><span class="p">(</span><span class="n"><span title="qsci_algo_interface.VanillaQSCIAlgorithm.analyze(input_states)">input_states</span></span><span class="p">,</span> <span class="n"><span title="qsci_algo_interface.VanillaQSCIAlgorithm.analyze(total_shots)">total_shots</span></span><span class="p">,</span> <span class="n"><span title="qsci_algo_interface.VanillaQSCIAlgorithm.analyze(lowering_level)">lowering_level</span></span><span class="o">=</span><span class="n"><a class="autorefs autorefs-internal" title="            LogicalCircuit
+<div class="language-python doc-signature highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">analyze</span><span class="p">(</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="n"><span title="qsci_algo_interface.VanillaQSCIAlgorithm.analyze(input_states)">input_states</span></span><span class="p">,</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="n"><span title="qsci_algo_interface.VanillaQSCIAlgorithm.analyze(total_shots)">total_shots</span></span><span class="p">,</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="n"><span title="qsci_algo_interface.VanillaQSCIAlgorithm.analyze(lowering_level)">lowering_level</span></span><span class="o">=</span><span class="n"><a class="autorefs autorefs-internal" title="            LogicalCircuit
 
 
   
       class-attribute
       instance-attribute
-   (qsci_algo_interface.LoweringLevel.LogicalCircuit)" href="#qsci_algo_interface.LoweringLevel.LogicalCircuit">LogicalCircuit</a></span><span class="p">,</span> <span class="o">**</span><span class="n"><span title="qsci_algo_interface.VanillaQSCIAlgorithm.analyze(**kwargs)">kwargs</span></span><span class="p">)</span>
+   (qsci_algo_interface.LoweringLevel.LogicalCircuit)" href="#qsci_algo_interface.LoweringLevel.LogicalCircuit">LogicalCircuit</a></span><span class="p">,</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="o">**</span><span class="n"><span title="qsci_algo_interface.VanillaQSCIAlgorithm.analyze(**kwargs)">kwargs</span></span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="p">)</span>
 </span></code></pre></div>
 
     <div class="doc doc-contents ">
@@ -5094,7 +5120,14 @@ enabling seamless integration with QURI SDK ecosystem.</p>
 
 
 <a href="#qsci_algo_interface.SingleTimeTeQSCIAlgorithm" class="headerlink" title="Permanent link">&para;</a></h2>
-<div class="language-python doc-signature highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">SingleTimeTeQSCIAlgorithm</span><span class="p">(</span><span class="n"><span title="qsci_algo_interface.SingleTimeTeQSCIAlgorithm(hamiltonian)">hamiltonian</span></span><span class="p">,</span> <span class="n"><span title="qsci_algo_interface.SingleTimeTeQSCIAlgorithm(evolution_time)">evolution_time</span></span><span class="p">,</span> <span class="n"><span title="qsci_algo_interface.SingleTimeTeQSCIAlgorithm(sampler)">sampler</span></span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n"><span title="qsci_algo_interface.SingleTimeTeQSCIAlgorithm(num_states_pick_out)">num_states_pick_out</span></span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n"><span title="qsci_algo_interface.SingleTimeTeQSCIAlgorithm(trotter_steps)">trotter_steps</span></span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n"><span title="qsci_algo_interface.SingleTimeTeQSCIAlgorithm(time_evolution_method)">time_evolution_method</span></span><span class="o">=</span><span class="s1">&#39;trotter&#39;</span><span class="p">)</span>
+<div class="language-python doc-signature highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">SingleTimeTeQSCIAlgorithm</span><span class="p">(</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="n"><span title="qsci_algo_interface.SingleTimeTeQSCIAlgorithm(hamiltonian)">hamiltonian</span></span><span class="p">,</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="n"><span title="qsci_algo_interface.SingleTimeTeQSCIAlgorithm(evolution_time)">evolution_time</span></span><span class="p">,</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="n"><span title="qsci_algo_interface.SingleTimeTeQSCIAlgorithm(sampler)">sampler</span></span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="n"><span title="qsci_algo_interface.SingleTimeTeQSCIAlgorithm(num_states_pick_out)">num_states_pick_out</span></span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    <span class="n"><span title="qsci_algo_interface.SingleTimeTeQSCIAlgorithm(trotter_steps)">trotter_steps</span></span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    <span class="n"><span title="qsci_algo_interface.SingleTimeTeQSCIAlgorithm(time_evolution_method)">time_evolution_method</span></span><span class="o">=</span><span class="s2">&quot;trotter&quot;</span><span class="p">,</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="p">)</span>
 </span></code></pre></div>
 
     <div class="doc doc-contents ">
@@ -5544,13 +5577,18 @@ enabling seamless integration with QURI SDK ecosystem.</p>
 
 
 <a href="#qsci_algo_interface.SingleTimeTeQSCIAlgorithm.analyze" class="headerlink" title="Permanent link">&para;</a></h3>
-<div class="language-python doc-signature highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">analyze</span><span class="p">(</span><span class="n"><span title="qsci_algo_interface.SingleTimeTeQSCIAlgorithm.analyze(input_states)">input_states</span></span><span class="p">,</span> <span class="n"><span title="qsci_algo_interface.SingleTimeTeQSCIAlgorithm.analyze(total_shots)">total_shots</span></span><span class="p">,</span> <span class="n"><span title="qsci_algo_interface.SingleTimeTeQSCIAlgorithm.analyze(lowering_level)">lowering_level</span></span><span class="o">=</span><span class="n"><a class="autorefs autorefs-internal" title="            LogicalCircuit
+<div class="language-python doc-signature highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">analyze</span><span class="p">(</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="n"><span title="qsci_algo_interface.SingleTimeTeQSCIAlgorithm.analyze(input_states)">input_states</span></span><span class="p">,</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="n"><span title="qsci_algo_interface.SingleTimeTeQSCIAlgorithm.analyze(total_shots)">total_shots</span></span><span class="p">,</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="n"><span title="qsci_algo_interface.SingleTimeTeQSCIAlgorithm.analyze(lowering_level)">lowering_level</span></span><span class="o">=</span><span class="n"><a class="autorefs autorefs-internal" title="            LogicalCircuit
 
 
   
       class-attribute
       instance-attribute
-   (qsci_algo_interface.LoweringLevel.LogicalCircuit)" href="#qsci_algo_interface.LoweringLevel.LogicalCircuit">LogicalCircuit</a></span><span class="p">,</span> <span class="o">**</span><span class="n"><span title="qsci_algo_interface.SingleTimeTeQSCIAlgorithm.analyze(**kwargs)">kwargs</span></span><span class="p">)</span>
+   (qsci_algo_interface.LoweringLevel.LogicalCircuit)" href="#qsci_algo_interface.LoweringLevel.LogicalCircuit">LogicalCircuit</a></span><span class="p">,</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="o">**</span><span class="n"><span title="qsci_algo_interface.SingleTimeTeQSCIAlgorithm.analyze(**kwargs)">kwargs</span></span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="p">)</span>
 </span></code></pre></div>
 
     <div class="doc doc-contents ">
@@ -5654,7 +5692,14 @@ enabling seamless integration with QURI SDK ecosystem.</p>
 
 
 <a href="#qsci_algo_interface.TimeAverageTeQSCIAlgorithm" class="headerlink" title="Permanent link">&para;</a></h2>
-<div class="language-python doc-signature highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">TimeAverageTeQSCIAlgorithm</span><span class="p">(</span><span class="n"><span title="qsci_algo_interface.TimeAverageTeQSCIAlgorithm(hamiltonian)">hamiltonian</span></span><span class="p">,</span> <span class="n"><span title="qsci_algo_interface.TimeAverageTeQSCIAlgorithm(evolution_times)">evolution_times</span></span><span class="p">,</span> <span class="n"><span title="qsci_algo_interface.TimeAverageTeQSCIAlgorithm(sampler)">sampler</span></span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n"><span title="qsci_algo_interface.TimeAverageTeQSCIAlgorithm(num_states_pick_out)">num_states_pick_out</span></span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n"><span title="qsci_algo_interface.TimeAverageTeQSCIAlgorithm(trotter_steps)">trotter_steps</span></span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n"><span title="qsci_algo_interface.TimeAverageTeQSCIAlgorithm(time_evolution_method)">time_evolution_method</span></span><span class="o">=</span><span class="s1">&#39;trotter&#39;</span><span class="p">)</span>
+<div class="language-python doc-signature highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">TimeAverageTeQSCIAlgorithm</span><span class="p">(</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="n"><span title="qsci_algo_interface.TimeAverageTeQSCIAlgorithm(hamiltonian)">hamiltonian</span></span><span class="p">,</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="n"><span title="qsci_algo_interface.TimeAverageTeQSCIAlgorithm(evolution_times)">evolution_times</span></span><span class="p">,</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="n"><span title="qsci_algo_interface.TimeAverageTeQSCIAlgorithm(sampler)">sampler</span></span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="n"><span title="qsci_algo_interface.TimeAverageTeQSCIAlgorithm(num_states_pick_out)">num_states_pick_out</span></span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    <span class="n"><span title="qsci_algo_interface.TimeAverageTeQSCIAlgorithm(trotter_steps)">trotter_steps</span></span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    <span class="n"><span title="qsci_algo_interface.TimeAverageTeQSCIAlgorithm(time_evolution_method)">time_evolution_method</span></span><span class="o">=</span><span class="s2">&quot;trotter&quot;</span><span class="p">,</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="p">)</span>
 </span></code></pre></div>
 
     <div class="doc doc-contents ">
@@ -6104,13 +6149,18 @@ enabling seamless integration with QURI SDK ecosystem.</p>
 
 
 <a href="#qsci_algo_interface.TimeAverageTeQSCIAlgorithm.analyze" class="headerlink" title="Permanent link">&para;</a></h3>
-<div class="language-python doc-signature highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">analyze</span><span class="p">(</span><span class="n"><span title="qsci_algo_interface.TimeAverageTeQSCIAlgorithm.analyze(input_states)">input_states</span></span><span class="p">,</span> <span class="n"><span title="qsci_algo_interface.TimeAverageTeQSCIAlgorithm.analyze(total_shots)">total_shots</span></span><span class="p">,</span> <span class="n"><span title="qsci_algo_interface.TimeAverageTeQSCIAlgorithm.analyze(lowering_level)">lowering_level</span></span><span class="o">=</span><span class="n"><a class="autorefs autorefs-internal" title="            LogicalCircuit
+<div class="language-python doc-signature highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">analyze</span><span class="p">(</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="n"><span title="qsci_algo_interface.TimeAverageTeQSCIAlgorithm.analyze(input_states)">input_states</span></span><span class="p">,</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="n"><span title="qsci_algo_interface.TimeAverageTeQSCIAlgorithm.analyze(total_shots)">total_shots</span></span><span class="p">,</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="n"><span title="qsci_algo_interface.TimeAverageTeQSCIAlgorithm.analyze(lowering_level)">lowering_level</span></span><span class="o">=</span><span class="n"><a class="autorefs autorefs-internal" title="            LogicalCircuit
 
 
   
       class-attribute
       instance-attribute
-   (qsci_algo_interface.LoweringLevel.LogicalCircuit)" href="#qsci_algo_interface.LoweringLevel.LogicalCircuit">LogicalCircuit</a></span><span class="p">,</span> <span class="o">**</span><span class="n"><span title="qsci_algo_interface.TimeAverageTeQSCIAlgorithm.analyze(**kwargs)">kwargs</span></span><span class="p">)</span>
+   (qsci_algo_interface.LoweringLevel.LogicalCircuit)" href="#qsci_algo_interface.LoweringLevel.LogicalCircuit">LogicalCircuit</a></span><span class="p">,</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="o">**</span><span class="n"><span title="qsci_algo_interface.TimeAverageTeQSCIAlgorithm.analyze(**kwargs)">kwargs</span></span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="p">)</span>
 </span></code></pre></div>
 
     <div class="doc doc-contents ">
@@ -6214,7 +6264,12 @@ enabling seamless integration with QURI SDK ecosystem.</p>
 
 
 <a href="#qsci_algo_interface.StateVectorTeQSCIAlgorithm" class="headerlink" title="Permanent link">&para;</a></h2>
-<div class="language-python doc-signature highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">StateVectorTeQSCIAlgorithm</span><span class="p">(</span><span class="n"><span title="qsci_algo_interface.StateVectorTeQSCIAlgorithm(hamiltonian)">hamiltonian</span></span><span class="p">,</span> <span class="n"><span title="qsci_algo_interface.StateVectorTeQSCIAlgorithm(evolution_time)">evolution_time</span></span><span class="p">,</span> <span class="n"><span title="qsci_algo_interface.StateVectorTeQSCIAlgorithm(num_states_pick_out)">num_states_pick_out</span></span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n"><span title="qsci_algo_interface.StateVectorTeQSCIAlgorithm(time_evolution_method)">time_evolution_method</span></span><span class="o">=</span><span class="s1">&#39;exact&#39;</span><span class="p">)</span>
+<div class="language-python doc-signature highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">StateVectorTeQSCIAlgorithm</span><span class="p">(</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="n"><span title="qsci_algo_interface.StateVectorTeQSCIAlgorithm(hamiltonian)">hamiltonian</span></span><span class="p">,</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="n"><span title="qsci_algo_interface.StateVectorTeQSCIAlgorithm(evolution_time)">evolution_time</span></span><span class="p">,</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="n"><span title="qsci_algo_interface.StateVectorTeQSCIAlgorithm(num_states_pick_out)">num_states_pick_out</span></span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="n"><span title="qsci_algo_interface.StateVectorTeQSCIAlgorithm(time_evolution_method)">time_evolution_method</span></span><span class="o">=</span><span class="s2">&quot;exact&quot;</span><span class="p">,</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="p">)</span>
 </span></code></pre></div>
 
     <div class="doc doc-contents ">
@@ -6607,13 +6662,18 @@ enabling seamless integration with QURI SDK ecosystem.</p>
 
 
 <a href="#qsci_algo_interface.StateVectorTeQSCIAlgorithm.analyze" class="headerlink" title="Permanent link">&para;</a></h3>
-<div class="language-python doc-signature highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">analyze</span><span class="p">(</span><span class="n"><span title="qsci_algo_interface.StateVectorTeQSCIAlgorithm.analyze(input_states)">input_states</span></span><span class="p">,</span> <span class="n"><span title="qsci_algo_interface.StateVectorTeQSCIAlgorithm.analyze(total_shots)">total_shots</span></span><span class="p">,</span> <span class="n"><span title="qsci_algo_interface.StateVectorTeQSCIAlgorithm.analyze(lowering_level)">lowering_level</span></span><span class="o">=</span><span class="n"><a class="autorefs autorefs-internal" title="            LogicalCircuit
+<div class="language-python doc-signature highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">analyze</span><span class="p">(</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="n"><span title="qsci_algo_interface.StateVectorTeQSCIAlgorithm.analyze(input_states)">input_states</span></span><span class="p">,</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="n"><span title="qsci_algo_interface.StateVectorTeQSCIAlgorithm.analyze(total_shots)">total_shots</span></span><span class="p">,</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="n"><span title="qsci_algo_interface.StateVectorTeQSCIAlgorithm.analyze(lowering_level)">lowering_level</span></span><span class="o">=</span><span class="n"><a class="autorefs autorefs-internal" title="            LogicalCircuit
 
 
   
       class-attribute
       instance-attribute
-   (qsci_algo_interface.LoweringLevel.LogicalCircuit)" href="#qsci_algo_interface.LoweringLevel.LogicalCircuit">LogicalCircuit</a></span><span class="p">,</span> <span class="o">**</span><span class="n"><span title="qsci_algo_interface.StateVectorTeQSCIAlgorithm.analyze(**kwargs)">kwargs</span></span><span class="p">)</span>
+   (qsci_algo_interface.LoweringLevel.LogicalCircuit)" href="#qsci_algo_interface.LoweringLevel.LogicalCircuit">LogicalCircuit</a></span><span class="p">,</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="o">**</span><span class="n"><span title="qsci_algo_interface.StateVectorTeQSCIAlgorithm.analyze(**kwargs)">kwargs</span></span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="p">)</span>
 </span></code></pre></div>
 
     <div class="doc doc-contents ">
@@ -6717,7 +6777,13 @@ enabling seamless integration with QURI SDK ecosystem.</p>
 
 
 <a href="#qsci_algo_interface.create_qsci_algorithm" class="headerlink" title="Permanent link">&para;</a></h2>
-<div class="language-python doc-signature highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">create_qsci_algorithm</span><span class="p">(</span><span class="n"><a class="autorefs autorefs-internal" title="variant (qsci_algo_interface.create_qsci_algorithm(variant))" href="#qsci_algo_interface.create_qsci_algorithm(variant)">variant</a></span><span class="p">,</span> <span class="n"><a class="autorefs autorefs-internal" title="hamiltonian (qsci_algo_interface.create_qsci_algorithm(hamiltonian))" href="#qsci_algo_interface.create_qsci_algorithm(hamiltonian)">hamiltonian</a></span><span class="p">,</span> <span class="n"><a class="autorefs autorefs-internal" title="sampler (qsci_algo_interface.create_qsci_algorithm(sampler))" href="#qsci_algo_interface.create_qsci_algorithm(sampler)">sampler</a></span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n"><a class="autorefs autorefs-internal" title="num_states_pick_out (qsci_algo_interface.create_qsci_algorithm(num_states_pick_out))" href="#qsci_algo_interface.create_qsci_algorithm(num_states_pick_out)">num_states_pick_out</a></span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n"><a class="autorefs autorefs-internal" title="**variant_kwargs (qsci_algo_interface.create_qsci_algorithm(**variant_kwargs))" href="#qsci_algo_interface.create_qsci_algorithm(**variant_kwargs)">variant_kwargs</a></span><span class="p">)</span>
+<div class="language-python doc-signature highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">create_qsci_algorithm</span><span class="p">(</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="n"><a class="autorefs autorefs-internal" title="variant (qsci_algo_interface.create_qsci_algorithm(variant))" href="#qsci_algo_interface.create_qsci_algorithm(variant)">variant</a></span><span class="p">,</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="n"><a class="autorefs autorefs-internal" title="hamiltonian (qsci_algo_interface.create_qsci_algorithm(hamiltonian))" href="#qsci_algo_interface.create_qsci_algorithm(hamiltonian)">hamiltonian</a></span><span class="p">,</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="n"><a class="autorefs autorefs-internal" title="sampler (qsci_algo_interface.create_qsci_algorithm(sampler))" href="#qsci_algo_interface.create_qsci_algorithm(sampler)">sampler</a></span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="n"><a class="autorefs autorefs-internal" title="num_states_pick_out (qsci_algo_interface.create_qsci_algorithm(num_states_pick_out))" href="#qsci_algo_interface.create_qsci_algorithm(num_states_pick_out)">num_states_pick_out</a></span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    <span class="o">**</span><span class="n"><a class="autorefs autorefs-internal" title="**variant_kwargs (qsci_algo_interface.create_qsci_algorithm(**variant_kwargs))" href="#qsci_algo_interface.create_qsci_algorithm(**variant_kwargs)">variant_kwargs</a></span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="p">)</span>
 </span></code></pre></div>
 
     <div class="doc doc-contents ">

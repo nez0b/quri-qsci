@@ -139,7 +139,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="teal"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
     
       <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
@@ -149,7 +149,7 @@
     
     
     
-    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="indigo"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="teal"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
     
       <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
@@ -1555,7 +1555,14 @@ for QSCI algorithms on different quantum architectures.</p>
   </span>
 
 <a href="#qsci_vm_analysis.ArchitectureInfo" class="headerlink" title="Permanent link">&para;</a></h2>
-<div class="language-python doc-signature highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">ArchitectureInfo</span><span class="p">(</span><span class="n"><span title="qsci_vm_analysis.ArchitectureInfo(name)">name</span></span><span class="p">,</span> <span class="n"><span title="qsci_vm_analysis.ArchitectureInfo(num_physical_qubits)">num_physical_qubits</span></span><span class="p">,</span> <span class="n"><span title="qsci_vm_analysis.ArchitectureInfo(connectivity)">connectivity</span></span><span class="p">,</span> <span class="n"><span title="qsci_vm_analysis.ArchitectureInfo(gate_fidelities)">gate_fidelities</span></span><span class="p">,</span> <span class="n"><span title="qsci_vm_analysis.ArchitectureInfo(decoherence_times)">decoherence_times</span></span><span class="p">,</span> <span class="n"><span title="qsci_vm_analysis.ArchitectureInfo(gate_times)">gate_times</span></span><span class="p">)</span>
+<div class="language-python doc-signature highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">ArchitectureInfo</span><span class="p">(</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="n"><span title="qsci_vm_analysis.ArchitectureInfo(name)">name</span></span><span class="p">,</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="n"><span title="qsci_vm_analysis.ArchitectureInfo(num_physical_qubits)">num_physical_qubits</span></span><span class="p">,</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="n"><span title="qsci_vm_analysis.ArchitectureInfo(connectivity)">connectivity</span></span><span class="p">,</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="n"><span title="qsci_vm_analysis.ArchitectureInfo(gate_fidelities)">gate_fidelities</span></span><span class="p">,</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    <span class="n"><span title="qsci_vm_analysis.ArchitectureInfo(decoherence_times)">decoherence_times</span></span><span class="p">,</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    <span class="n"><span title="qsci_vm_analysis.ArchitectureInfo(gate_times)">gate_times</span></span><span class="p">,</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="p">)</span>
 </span></code></pre></div>
 
     <div class="doc doc-contents ">
@@ -1849,7 +1856,15 @@ for QSCI algorithms on different quantum architectures.</p>
   </span>
 
 <a href="#qsci_vm_analysis.CircuitResourceEstimate" class="headerlink" title="Permanent link">&para;</a></h2>
-<div class="language-python doc-signature highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">CircuitResourceEstimate</span><span class="p">(</span><span class="n"><span title="qsci_vm_analysis.CircuitResourceEstimate(gate_count)">gate_count</span></span><span class="p">,</span> <span class="n"><span title="qsci_vm_analysis.CircuitResourceEstimate(circuit_depth)">circuit_depth</span></span><span class="p">,</span> <span class="n"><span title="qsci_vm_analysis.CircuitResourceEstimate(physical_qubit_count)">physical_qubit_count</span></span><span class="p">,</span> <span class="n"><span title="qsci_vm_analysis.CircuitResourceEstimate(logical_qubit_count)">logical_qubit_count</span></span><span class="p">,</span> <span class="n"><span title="qsci_vm_analysis.CircuitResourceEstimate(execution_time)">execution_time</span></span><span class="p">,</span> <span class="n"><span title="qsci_vm_analysis.CircuitResourceEstimate(fidelity_estimate)">fidelity_estimate</span></span><span class="p">,</span> <span class="n"><span title="qsci_vm_analysis.CircuitResourceEstimate(swap_overhead)">swap_overhead</span></span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<div class="language-python doc-signature highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">CircuitResourceEstimate</span><span class="p">(</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="n"><span title="qsci_vm_analysis.CircuitResourceEstimate(gate_count)">gate_count</span></span><span class="p">,</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="n"><span title="qsci_vm_analysis.CircuitResourceEstimate(circuit_depth)">circuit_depth</span></span><span class="p">,</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="n"><span title="qsci_vm_analysis.CircuitResourceEstimate(physical_qubit_count)">physical_qubit_count</span></span><span class="p">,</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="n"><span title="qsci_vm_analysis.CircuitResourceEstimate(logical_qubit_count)">logical_qubit_count</span></span><span class="p">,</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    <span class="n"><span title="qsci_vm_analysis.CircuitResourceEstimate(execution_time)">execution_time</span></span><span class="p">,</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    <span class="n"><span title="qsci_vm_analysis.CircuitResourceEstimate(fidelity_estimate)">fidelity_estimate</span></span><span class="p">,</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    <span class="n"><span title="qsci_vm_analysis.CircuitResourceEstimate(swap_overhead)">swap_overhead</span></span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="p">)</span>
 </span></code></pre></div>
 
     <div class="doc doc-contents ">
@@ -2333,7 +2348,9 @@ for QSCI algorithms on different quantum architectures.</p>
   </span>
 
 <a href="#qsci_vm_analysis.VMCircuitAnalyzer.architecture" class="headerlink" title="Permanent link">&para;</a></h3>
-<div class="language-python doc-signature highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">architecture</span> <span class="o">=</span> <span class="n"><a class="autorefs autorefs-internal" title="architecture (qsci_vm_analysis.VMCircuitAnalyzer(architecture))" href="#qsci_vm_analysis.VMCircuitAnalyzer(architecture)">architecture</a></span> <span class="ow">or</span> <span class="n"><span title="qsci_vm_analysis.VMCircuitAnalyzer(self)._get_default_star_architecture">_get_default_star_architecture</span></span><span class="p">()</span>
+<div class="language-python doc-signature highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">architecture</span> <span class="o">=</span> <span class="p">(</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="n"><a class="autorefs autorefs-internal" title="architecture (qsci_vm_analysis.VMCircuitAnalyzer(architecture))" href="#qsci_vm_analysis.VMCircuitAnalyzer(architecture)">architecture</a></span> <span class="ow">or</span> <span class="n"><span title="qsci_vm_analysis.VMCircuitAnalyzer(self)._get_default_star_architecture">_get_default_star_architecture</span></span><span class="p">()</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="p">)</span>
 </span></code></pre></div>
 
     <div class="doc doc-contents ">
@@ -2639,7 +2656,12 @@ for QSCI algorithms on different quantum architectures.</p>
 
 
 <a href="#qsci_vm_analysis.QSCIVMAnalysis" class="headerlink" title="Permanent link">&para;</a></h2>
-<div class="language-python doc-signature highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">QSCIVMAnalysis</span><span class="p">(</span><span class="n"><a class="autorefs autorefs-internal" title="lowering_level (qsci_vm_analysis.QSCIVMAnalysis(lowering_level))" href="#qsci_vm_analysis.QSCIVMAnalysis(lowering_level)">lowering_level</a></span><span class="p">,</span> <span class="n"><a class="autorefs autorefs-internal" title="circuit_estimates (qsci_vm_analysis.QSCIVMAnalysis(circuit_estimates))" href="#qsci_vm_analysis.QSCIVMAnalysis(circuit_estimates)">circuit_estimates</a></span><span class="p">,</span> <span class="n"><a class="autorefs autorefs-internal" title="total_shots (qsci_vm_analysis.QSCIVMAnalysis(total_shots))" href="#qsci_vm_analysis.QSCIVMAnalysis(total_shots)">total_shots</a></span><span class="p">,</span> <span class="n"><a class="autorefs autorefs-internal" title="architecture (qsci_vm_analysis.QSCIVMAnalysis(architecture))" href="#qsci_vm_analysis.QSCIVMAnalysis(architecture)">architecture</a></span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<div class="language-python doc-signature highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">QSCIVMAnalysis</span><span class="p">(</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="n"><a class="autorefs autorefs-internal" title="lowering_level (qsci_vm_analysis.QSCIVMAnalysis(lowering_level))" href="#qsci_vm_analysis.QSCIVMAnalysis(lowering_level)">lowering_level</a></span><span class="p">,</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="n"><a class="autorefs autorefs-internal" title="circuit_estimates (qsci_vm_analysis.QSCIVMAnalysis(circuit_estimates))" href="#qsci_vm_analysis.QSCIVMAnalysis(circuit_estimates)">circuit_estimates</a></span><span class="p">,</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="n"><a class="autorefs autorefs-internal" title="total_shots (qsci_vm_analysis.QSCIVMAnalysis(total_shots))" href="#qsci_vm_analysis.QSCIVMAnalysis(total_shots)">total_shots</a></span><span class="p">,</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="n"><a class="autorefs autorefs-internal" title="architecture (qsci_vm_analysis.QSCIVMAnalysis(architecture))" href="#qsci_vm_analysis.QSCIVMAnalysis(architecture)">architecture</a></span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="p">)</span>
 </span></code></pre></div>
 
     <div class="doc doc-contents ">
@@ -3722,7 +3744,12 @@ for QSCI algorithms on different quantum architectures.</p>
 
 
 <a href="#qsci_vm_analysis.VMEnabledQSCIAlgorithm.analyze" class="headerlink" title="Permanent link">&para;</a></h3>
-<div class="language-python doc-signature highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">analyze</span><span class="p">(</span><span class="n"><span title="qsci_vm_analysis.VMEnabledQSCIAlgorithm.analyze(input_states)">input_states</span></span><span class="p">,</span> <span class="n"><span title="qsci_vm_analysis.VMEnabledQSCIAlgorithm.analyze(total_shots)">total_shots</span></span><span class="p">,</span> <span class="n"><span title="qsci_vm_analysis.VMEnabledQSCIAlgorithm.analyze(lowering_level)">lowering_level</span></span><span class="o">=</span><span class="n"><span title="qsci_vm_analysis.qsci_algo_interface.LoweringLevel.LogicalCircuit">LogicalCircuit</span></span><span class="p">,</span> <span class="o">**</span><span class="n"><span title="qsci_vm_analysis.VMEnabledQSCIAlgorithm.analyze(**kwargs)">kwargs</span></span><span class="p">)</span>
+<div class="language-python doc-signature highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">analyze</span><span class="p">(</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="n"><span title="qsci_vm_analysis.VMEnabledQSCIAlgorithm.analyze(input_states)">input_states</span></span><span class="p">,</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="n"><span title="qsci_vm_analysis.VMEnabledQSCIAlgorithm.analyze(total_shots)">total_shots</span></span><span class="p">,</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="n"><span title="qsci_vm_analysis.VMEnabledQSCIAlgorithm.analyze(lowering_level)">lowering_level</span></span><span class="o">=</span><span class="n"><span title="qsci_vm_analysis.qsci_algo_interface.LoweringLevel.LogicalCircuit">LogicalCircuit</span></span><span class="p">,</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="o">**</span><span class="n"><span title="qsci_vm_analysis.VMEnabledQSCIAlgorithm.analyze(**kwargs)">kwargs</span></span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="p">)</span>
 </span></code></pre></div>
 
     <div class="doc doc-contents ">
@@ -3812,7 +3839,9 @@ for QSCI algorithms on different quantum architectures.</p>
 
 
 <a href="#qsci_vm_analysis.create_vm_enabled_algorithm" class="headerlink" title="Permanent link">&para;</a></h2>
-<div class="language-python doc-signature highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">create_vm_enabled_algorithm</span><span class="p">(</span><span class="n"><a class="autorefs autorefs-internal" title="base_algorithm (qsci_vm_analysis.create_vm_enabled_algorithm(base_algorithm))" href="#qsci_vm_analysis.create_vm_enabled_algorithm(base_algorithm)">base_algorithm</a></span><span class="p">,</span> <span class="n"><a class="autorefs autorefs-internal" title="architecture_name (qsci_vm_analysis.create_vm_enabled_algorithm(architecture_name))" href="#qsci_vm_analysis.create_vm_enabled_algorithm(architecture_name)">architecture_name</a></span><span class="o">=</span><span class="s1">&#39;STAR&#39;</span><span class="p">)</span>
+<div class="language-python doc-signature highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">create_vm_enabled_algorithm</span><span class="p">(</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="n"><a class="autorefs autorefs-internal" title="base_algorithm (qsci_vm_analysis.create_vm_enabled_algorithm(base_algorithm))" href="#qsci_vm_analysis.create_vm_enabled_algorithm(base_algorithm)">base_algorithm</a></span><span class="p">,</span> <span class="n"><a class="autorefs autorefs-internal" title="architecture_name (qsci_vm_analysis.create_vm_enabled_algorithm(architecture_name))" href="#qsci_vm_analysis.create_vm_enabled_algorithm(architecture_name)">architecture_name</a></span><span class="o">=</span><span class="s2">&quot;STAR&quot;</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="p">)</span>
 </span></code></pre></div>
 
     <div class="doc doc-contents ">
