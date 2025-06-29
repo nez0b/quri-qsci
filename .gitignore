@@ -5,8 +5,10 @@ __pycache__/
 # ai
 CLAUDE.md
 design.txt
-
+.claude
+.clinerules
 .DS_Store
+figures/
 
 # C extensions
 *.so

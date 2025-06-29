@@ -6,6 +6,7 @@ before running the full H6 molecule study.
 """
 
 import numpy as np
+import pytest
 import sys
 import os
 from typing import Dict, List
@@ -72,71 +73,56 @@ def create_test_state():
 def test_hamiltonian_creation():
     """Test Hamiltonian creation."""
     print("\n--- Testing Hamiltonian Creation ---")
-    try:
-        hamiltonian = create_test_hamiltonian()
-        print(f"✓ Created test Hamiltonian with {len(hamiltonian)} terms")
-        
-        # Check if Hermitian
-        from quri_parts.core.operator import is_hermitian
-        if is_hermitian(hamiltonian):
-            print("✓ Hamiltonian is Hermitian")
-        else:
-            print("✗ Hamiltonian is not Hermitian")
-            return False
-        
-        return True
-    except Exception as e:
-        print(f"✗ Failed to create Hamiltonian: {e}")
-        return False
+    hamiltonian = create_test_hamiltonian()
+    print(f"✓ Created test Hamiltonian with {len(hamiltonian)} terms")
+    
+    # Check if Hermitian
+    from quri_parts.core.operator import is_hermitian
+    assert is_hermitian(hamiltonian), "Hamiltonian must be Hermitian"
+    print("✓ Hamiltonian is Hermitian")
 
 
 def test_state_creation():
     """Test quantum state creation."""
     print("\n--- Testing Quantum State Creation ---")
-    try:
-        state = create_test_state()
-        print(f"✓ Created test state with {state.qubit_count} qubits")
-        print(f"✓ Circuit has {len(state.circuit.gates)} gates")
-        return True
-    except Exception as e:
-        print(f"✗ Failed to create quantum state: {e}")
-        return False
+    state = create_test_state()
+    print(f"✓ Created test state with {state.qubit_count} qubits")
+    print(f"✓ Circuit has {len(state.circuit.gates)} gates")
+    assert state.qubit_count == 2, "State should have 2 qubits"
+    assert len(state.circuit.gates) > 0, "Circuit should have gates"
 
 
 def test_algorithm_creation():
     """Test algorithm creation."""
     print("\n--- Testing Algorithm Creation ---")
-    try:
-        hamiltonian = create_test_hamiltonian()
-        
-        # Test factory function
-        vanilla_algo = create_qsci_algorithm(
-            QSCIVariant.VANILLA,
-            hamiltonian,
-            num_states_pick_out=10
-        )
-        print(f"✓ Created vanilla QSCI: {vanilla_algo.name}")
-        
-        te_algo = create_qsci_algorithm(
-            QSCIVariant.SINGLE_TIME_TE,
-            hamiltonian,
-            evolution_time=1.0,
-            num_states_pick_out=10
-        )
-        print(f"✓ Created TE-QSCI: {te_algo.name}")
-        
-        # Test direct class creation
-        direct_algo = SingleTimeTeQSCIAlgorithm(
-            hamiltonian=hamiltonian,
-            evolution_time=0.5,
-            num_states_pick_out=10
-        )
-        print(f"✓ Created direct TE-QSCI: {direct_algo.name}")
-        
-        return True
-    except Exception as e:
-        print(f"✗ Failed to create algorithms: {e}")
-        return False
+    hamiltonian = create_test_hamiltonian()
+    
+    # Test factory function
+    vanilla_algo = create_qsci_algorithm(
+        QSCIVariant.VANILLA,
+        hamiltonian,
+        num_states_pick_out=10
+    )
+    print(f"✓ Created vanilla QSCI: {vanilla_algo.name}")
+    assert vanilla_algo.name is not None, "Algorithm should have a name"
+    
+    te_algo = create_qsci_algorithm(
+        QSCIVariant.SINGLE_TIME_TE,
+        hamiltonian,
+        evolution_time=1.0,
+        num_states_pick_out=10
+    )
+    print(f"✓ Created TE-QSCI: {te_algo.name}")
+    assert te_algo.name is not None, "TE algorithm should have a name"
+    
+    # Test direct class creation
+    direct_algo = SingleTimeTeQSCIAlgorithm(
+        hamiltonian=hamiltonian,
+        evolution_time=0.5,
+        num_states_pick_out=10
+    )
+    print(f"✓ Created direct TE-QSCI: {direct_algo.name}")
+    assert direct_algo.name is not None, "Direct algorithm should have a name"
 
 
 def test_vm_analysis():
@@ -169,10 +155,9 @@ def test_vm_analysis():
         print(f"✓ Arch analysis - Latency: {arch_analysis.total_latency}, "
               f"Qubits: {arch_analysis.max_physical_qubit_count}")
         
-        return True
+        assert True, "VM analysis completed successfully"
     except Exception as e:
-        print(f"✗ Failed VM analysis: {e}")
-        return False
+        pytest.fail(f"VM analysis failed: {e}")
 
 
 def test_sampling_based_execution():
@@ -210,10 +195,9 @@ def test_sampling_based_execution():
         te_result = te_algo.run(test_state, total_shots=100)
         print(f"✓ TE-QSCI result - Energy: {te_result.ground_state_energy:.4f}")
         
-        return True
+        assert True, "Sampling execution completed successfully"
     except Exception as e:
-        print(f"✗ Failed sampling execution: {e}")
-        return False
+        pytest.fail(f"Sampling execution failed: {e}")
 
 
 def run_all_tests():
