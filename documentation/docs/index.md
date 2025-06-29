@@ -44,11 +44,9 @@ All QSCI variants are validated against exact diagonalization with 100% test suc
 
 TE-QSCI generates important electronic configurations through time evolution:
 
-```
-|ψ(t)⟩ = e^(-iĤt)|ψ_I⟩ = |ψ_I⟩ - iĤt|ψ_I⟩ + (−iĤt)²/2!|ψ_I⟩ + ...
-```
+$$|\psi(t)\rangle = e^{-i\hat{H}t}|\psi_I\rangle = |\psi_I\rangle - i\hat{H}t|\psi_I\rangle + \frac{(-i\hat{H}t)^2}{2!}|\psi_I\rangle + \ldots$$
 
-Where the k-th order term includes up to 2k-th order excitations, systematically exploring the configuration space needed for accurate quantum chemistry calculations.
+Where the $k$-th order term includes up to $2k$-th order excitations, systematically exploring the configuration space needed for accurate quantum chemistry calculations.
 
 ## Getting Started
 

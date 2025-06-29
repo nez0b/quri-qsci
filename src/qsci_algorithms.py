@@ -766,6 +766,168 @@ class TimeAverageTE_QSCI(TimeEvolvedQSCI):
         )
 
 
+class FfsimStateVectorQSCI(QSCIBase):
+    """QSCI algorithm for direct ffsim state vector input.
+    
+    This class provides direct integration with ffsim's LUCJ/UCJ ansatz state vectors,
+    bypassing circuit sampling and using exact computational basis probabilities
+    for more accurate QSCI analysis.
+    """
+    
+    def __init__(
+        self,
+        hamiltonian: Operator,
+        num_states_pick_out: Optional[int] = None
+    ):
+        """Initialize FfsimStateVectorQSCI.
+        
+        Args:
+            hamiltonian: Target Hamiltonian to diagonalize (quri-parts Operator)
+            num_states_pick_out: Number of states to select for subspace
+        """
+        # No sampler needed for state vector method
+        super().__init__(hamiltonian, sampler=None, num_states_pick_out=num_states_pick_out)
+    
+    def run(
+        self,
+        input_states: Sequence[CircuitQuantumState],
+        total_shots: int,
+        **kwargs
+    ) -> QSCIResult:
+        """Run QSCI algorithm - maintained for interface compatibility.
+        
+        Note: This method maintains the standard QSCI interface but is not the primary
+        entry point for ffsim integration. Use run_ffsim_state_vector() instead.
+        """
+        raise NotImplementedError(
+            "FfsimStateVectorQSCI is designed for direct state vector input. "
+            "Use run_ffsim_state_vector() method instead."
+        )
+    
+    def run_ffsim_state_vector(
+        self,
+        ffsim_state_vector: np.ndarray,
+        n_qubits: int,
+        num_eigenstates: int = 1,
+        nelec: tuple[int, int] = None,
+        **kwargs
+    ) -> QSCIResult:
+        """Run QSCI with direct ffsim state vector input.
+        
+        Args:
+            ffsim_state_vector: State vector from ffsim LUCJ/UCJ ansatz (numpy array)
+            n_qubits: Number of qubits in the system (typically 2 * norb)
+            num_eigenstates: Number of eigenstates to compute
+            **kwargs: Additional parameters
+            
+        Returns:
+            QSCIResult with exact QSCI analysis results
+        """
+        import time
+        start_time = kwargs.get("start_time", time.time())
+        
+        print(f"Running FfsimStateVectorQSCI...")
+        print(f"  Input state vector dimension: {len(ffsim_state_vector)}")
+        print(f"  Target qubit space dimension: 2^{n_qubits} = {2**n_qubits}")
+        
+        # Convert ffsim state vector to computational basis probabilities
+        probabilities = self._ffsim_to_computational_probabilities(
+            ffsim_state_vector, n_qubits, nelec
+        )
+        
+        print(f"  Extracted {len(probabilities)} non-zero computational basis states")
+        
+        # Select the most probable states for QSCI subspace
+        sorted_probs = sorted(probabilities.items(), key=lambda x: x[1], reverse=True)
+        num_states_to_select = self.num_states_pick_out or min(100, len(sorted_probs))
+        
+        print(f"  Selecting top {num_states_to_select} states for QSCI subspace")
+        
+        # Create computational basis states from most probable outcomes  
+        selected_states = []
+        for bits_int, prob in sorted_probs[:num_states_to_select]:
+            state = ComputationalBasisState(n_qubits, bits=bits_int)
+            selected_states.append(state)
+            
+        # Show selected states for debugging
+        print(f"  Top selected states:")
+        for i, (bits_int, prob) in enumerate(sorted_probs[:min(5, num_states_to_select)]):
+            bits_str = format(bits_int, f'0{n_qubits}b')
+            print(f"    {i+1}: |{bits_str}⟩ = {bits_int}, prob = {prob:.6f}")
+        
+        # Generate and diagonalize truncated Hamiltonian
+        print(f"  Generating truncated Hamiltonian in {len(selected_states)}-dimensional subspace...")
+        truncated_hamiltonian = self._generate_truncated_hamiltonian(selected_states)
+        
+        print(f"  Diagonalizing for {num_eigenstates} eigenstate(s)...")
+        eigvals, eigvecs = self._diagonalize_truncated_hamiltonian(
+            truncated_hamiltonian, num_eigenstates
+        )
+        
+        # Construct eigenstates
+        eigenstates = [(eigvecs[i], selected_states) for i in range(num_eigenstates)]
+        
+        execution_time = time.time() - start_time
+        
+        print(f"  QSCI ground state energy: {eigvals[0]:.6f} Ha")
+        print(f"  Execution time: {execution_time:.3f} seconds")
+        
+        return QSCIResult(
+            eigenvalues=eigvals,
+            eigenstates=eigenstates,
+            selected_states=selected_states,
+            subspace_dimension=len(selected_states),
+            total_shots=0,  # No sampling in state vector method
+            algorithm_variant=QSCIVariant.STATE_VECTOR,
+            execution_time=execution_time,
+            computational_basis_probabilities=probabilities
+        )
+    
+    def _ffsim_to_computational_probabilities(
+        self,
+        ffsim_state_vector: np.ndarray,
+        n_qubits: int,
+        nelec: tuple[int, int] = None
+    ) -> Dict[int, float]:
+        """Convert ffsim state vector to computational basis probabilities.
+        
+        Uses the corrected fermionic-to-computational mapping with proper
+        Jordan-Wigner bit ordering.
+        """
+        # Import from ffsim module
+        try:
+            from .ffsim_integration.state_conversion import _map_fermionic_amplitudes_directly
+            
+            # Convert fermionic state vector to computational basis amplitudes
+            computational_amplitudes = _map_fermionic_amplitudes_directly(
+                ffsim_state_vector, n_qubits, nelec
+            )
+            
+            # Calculate probabilities |ψ_i|²
+            probabilities = {}
+            for i, amplitude in enumerate(computational_amplitudes):
+                prob = abs(amplitude) ** 2
+                if prob > 1e-12:  # Only store significant probabilities
+                    probabilities[i] = prob
+                    
+            # Verify normalization
+            total_prob = sum(probabilities.values())
+            print(f"  Total probability: {total_prob:.6f}")
+            
+            if abs(total_prob - 1.0) > 1e-6:
+                print(f"  Warning: State not properly normalized, renormalizing...")
+                for i in probabilities:
+                    probabilities[i] /= total_prob
+                    
+            return probabilities
+            
+        except ImportError as e:
+            raise ImportError(
+                f"Cannot import ffsim state conversion utilities: {e}. "
+                f"Install ffsim integration with: pip install quri-qsci[ffsim]"
+            )
+
+
 class StateVectorTE_QSCI(TimeEvolvedQSCI):
     """State vector TE-QSCI wrapper for testing compatibility."""
     

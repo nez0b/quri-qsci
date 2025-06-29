@@ -1,7 +1,8 @@
 """
-TE-QSCI (Time-Evolved Quantum Selected Configuration Interaction) package.
+QSCI (Quantum Selected Configuration Interaction) package with optional ffsim integration.
 
-This package implements the TE-QSCI algorithm and its variants using the QURI Parts framework.
+This package implements the QSCI algorithm and its variants using the QURI Parts framework.
+Optional ffsim integration provides UCJ/LUCJ ansatz support.
 """
 
 from .qsci_algorithms import (
@@ -28,8 +29,16 @@ from .qsci_vm_analysis import (
     create_vm_enabled_algorithm
 )
 
+# Optional ffsim module - only available if ffsim is installed
+try:
+    from . import ffsim_integration
+    FFSIM_AVAILABLE = True
+except ImportError:
+    ffsim_integration = None
+    FFSIM_AVAILABLE = False
+
 __version__ = "0.1.0"
-__author__ = "TE-QSCI Implementation"
+__author__ = "QSCI Development Team"
 __all__ = [
     # Core algorithms
     "QSCIResult", "QSCIVariant", "VanillaQSCI", "TimeEvolvedQSCI",
@@ -39,5 +48,7 @@ __all__ = [
     "TimeAverageTeQSCIAlgorithm", "StateVectorTeQSCIAlgorithm",
     "create_qsci_algorithm", "LoweringLevel",
     # VM analysis
-    "CircuitResourceEstimate", "VMCircuitAnalyzer", "create_vm_enabled_algorithm"
+    "CircuitResourceEstimate", "VMCircuitAnalyzer", "create_vm_enabled_algorithm",
+    # Optional ffsim module
+    "ffsim_integration", "FFSIM_AVAILABLE"
 ]

@@ -1,25 +1,47 @@
 [project]
-name = "te-qsci-project"
+name = "quri-qsci"
 version = "0.1.0"
-description = "Add your description here"
+description = "Quantum Selected Configuration Interaction (QSCI) algorithms with optional ffsim integration"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
-    "matplotlib>=3.10.3",
     "numpy>=1.24.0,<2.0.0",
     "quri-parts[openfermion,pyscf,qulacs]>=0.22.1",
     "quri-algo>=0.2.0",
     "scipy>=1.15.3",
     "pyscf>=2.6.0",
-    "seaborn>=0.13.2",
-    "qiskit-addon-sqd>=0.11.0",
     "quri-parts-qulacs>=0.22.1",
     "quri-parts-openfermion>=0.22.1",
     "quri-parts-pyscf>=0.22.1",
+    "ffsim>=0.0.57",
+    "mkdocs>=1.6.1",
+    "mkdocs-material>=9.6.14",
+]
+
+[project.optional-dependencies]
+ffsim = [
+    "ffsim>=0.0.57",
+]
+dev = [
+    "pytest>=6.0",
+    "pytest-cov>=2.0",
+    "black>=22.0",
+    "isort>=5.0",
+    "flake8>=4.0",
+]
+docs = [
     "mkdocs>=1.6.1",
     "mkdocs-material>=9.6.14",
     "mkdocstrings[python]>=0.29.1",
     "mkdocs-gen-files>=0.5.0",
     "mkdocs-literate-nav>=0.6.2",
     "mkdocs-section-index>=0.3.10",
+]
+examples = [
+    "matplotlib>=3.10.3",
+    "seaborn>=0.13.2",
+    "qiskit-addon-sqd>=0.11.0",
+]
+all = [
+    "quri-qsci[ffsim,dev,docs,examples]",
 ]

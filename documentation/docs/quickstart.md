@@ -110,9 +110,8 @@ initial_state = GeneralCircuitQuantumState(2, circuit)
 ```
 
 This creates the uniform superposition state:
-```
-|ψ⟩ = |++⟩ = (|00⟩ + |01⟩ + |10⟩ + |11⟩)/2
-```
+
+$$|\psi\rangle = |++\rangle = \frac{|00\rangle + |01\rangle + |10\rangle + |11\rangle}{2}$$
 
 ### 3. Configure the Algorithm
 

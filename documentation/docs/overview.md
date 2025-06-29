@@ -9,11 +9,9 @@ Quantum Selected Configuration Interaction (QSCI) is a quantum algorithm for qua
 ### Configuration Interaction
 Configuration Interaction (CI) is a post-Hartree-Fock linear variational method for solving the nonrelativistic Schrödinger equation within the Born-Oppenheimer approximation. The key idea is to express the wavefunction as a linear combination of Slater determinants:
 
-```
-|Ψ⟩ = c₀|Φ₀⟩ + ∑ᵢᵃ cᵢᵃ|Φᵢᵃ⟩ + ∑ᵢⱼᵃᵇ cᵢⱼᵃᵇ|Φᵢⱼᵃᵇ⟩ + ...
-```
+$$|\Psi\rangle = c_0|\Phi_0\rangle + \sum_{i}^{a} c_i^a|\Phi_i^a\rangle + \sum_{ij}^{ab} c_{ij}^{ab}|\Phi_{ij}^{ab}\rangle + \ldots$$
 
-Where |Φ₀⟩ is the Hartree-Fock reference, |Φᵢᵃ⟩ are singly excited determinants, |Φᵢⱼᵃᵇ⟩ are doubly excited determinants, etc.
+Where $|\Phi_0\rangle$ is the Hartree-Fock reference, $|\Phi_i^a\rangle$ are singly excited determinants, $|\Phi_{ij}^{ab}\rangle$ are doubly excited determinants, etc.
 
 ### Selected Configuration Interaction
 The challenge with full CI is the exponential scaling with system size. Selected CI methods choose only the most important configurations based on some criterion. QSCI uses quantum sampling to identify these important configurations.
@@ -21,11 +19,9 @@ The challenge with full CI is the exponential scaling with system size. Selected
 ### Time Evolution for Configuration Generation
 TE-QSCI uses quantum time evolution to systematically generate configurations:
 
-```
-|ψ(t)⟩ = e^(-iĤt)|ψ_I⟩ = |ψ_I⟩ - iĤt|ψ_I⟩ + (−iĤt)²/2!|ψ_I⟩ + ...
-```
+$$|\psi(t)\rangle = e^{-i\hat{H}t}|\psi_I\rangle = |\psi_I\rangle - i\hat{H}t|\psi_I\rangle + \frac{(-i\hat{H}t)^2}{2!}|\psi_I\rangle + \ldots$$
 
-The k-th order term in this expansion includes up to 2k-th order excitations from the initial state, providing a systematic way to explore the configuration space.
+The $k$-th order term in this expansion includes up to $2k$-th order excitations from the initial state, providing a systematic way to explore the configuration space.
 
 ## Algorithm Variants
 
@@ -89,8 +85,8 @@ graph TD
 
 QSCI has been validated on various quantum chemistry systems:
 
-- **Small Molecules**: H₂, LiH with complete basis sets
-- **Medium Molecules**: H₆ linear chain with STO-3G basis (919 Pauli terms)
+- **Small Molecules**: H$_2$, LiH with complete basis sets
+- **Medium Molecules**: H$_6$ linear chain with STO-3G basis (919 Pauli terms)
 - **Model Systems**: TFIM, Heisenberg models for algorithm validation
 - **Random Systems**: Verification against exact diagonalization
 

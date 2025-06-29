@@ -1,10 +1,10 @@
 site_name: QSCI - Quantum Selected Configuration Interaction
 site_description: Comprehensive documentation for the QSCI and TE-QSCI quantum algorithms
 site_author: QSCI Development Team
-site_url: https://qsci.readthedocs.io
+site_url: https://nez0b.github.io/quri-qsci
 
-repo_name: QSCI/quri-qsci
-repo_url: https://github.com/QunaSys/quri-qsci
+repo_name: nez0b/quri-qsci
+repo_url: https://github.com/nez0b/quri-qsci
 edit_uri: edit/main/docs/
 
 copyright: Copyright &copy; 2024 QSCI Development Team
@@ -21,8 +21,8 @@ theme:
     # Palette toggle for light mode
     - media: "(prefers-color-scheme: light)"
       scheme: default
-      primary: blue
-      accent: indigo
+      primary: custom
+      accent: teal
       toggle:
         icon: material/brightness-7
         name: Switch to dark mode
@@ -30,8 +30,8 @@ theme:
     # Palette toggle for dark mode
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
-      primary: blue
-      accent: indigo
+      primary: custom
+      accent: teal
       toggle:
         icon: material/brightness-4
         name: Switch to system preference
@@ -124,42 +124,20 @@ nav:
     - overview.md
     - Installation: installation.md
     - Quick Start: quickstart.md
-  - User Guide:
-    - Algorithm Overview: algorithms/overview.md
-    - VanillaQSCI: algorithms/vanilla_qsci.md
-    - TE-QSCI Variants: algorithms/te_qsci.md
-    - Time Evolution: algorithms/time_evolution.md
-    - State Preparation: algorithms/state_preparation.md
   - Examples:
     - Overview: examples/index.md
-    - H2 Potential Curve: examples/h2_molecule.md
-    - H6 Figure 1 Analysis: examples/h6_molecule.md
-    - Basic Usage: examples/basic_usage.md
-    - Performance Analysis: examples/performance.md
   - Testing:
     - Testing Strategy: testing/strategy.md
-    - Exact Diagonalization: testing/exact_diagonalization.md
-    - Test Utilities: testing/utilities.md
-    - Contributing Tests: testing/contributing.md
   - API Reference:
     - Overview: api/index.md
     - api/
   - Design & Implementation:
     - Overview: design/index.md
-    - Architecture: design/architecture.md
-    - QURI Integration: design/quri_integration.md
-    - Time Evolution Methods: design/time_evolution.md
-    - Performance Considerations: design/performance.md
-    - Future Extensions: design/future.md
-  - About:
-    - Changelog: changelog.md
-    - Contributing: contributing.md
-    - License: license.md
 
 extra:
   social:
     - icon: fontawesome/brands/github
-      link: https://github.com/QunaSys/quri-qsci
+      link: https://github.com/nez0b/quri-qsci
     - icon: fontawesome/brands/python
       link: https://pypi.org/project/quri-qsci/
 
