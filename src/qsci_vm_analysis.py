@@ -19,16 +19,13 @@ from .qsci_algo_interface import (
     LoweringLevel, Analysis, QSCIAnalysis, QSCIAlgorithmBase
 )
 
-# QURI VM related imports (these would need to be installed)
-# For now, we'll create placeholder interfaces
-try:
-    # Placeholder for QURI VM imports
-    # from quri_vm import QuantumVM, STARArchitecture
-    # from quri_vm.analysis import CircuitAnalyzer
-    pass
-except ImportError:
-    # Create placeholder classes for demonstration
-    pass
+# QURI VM related imports
+from quri_vm import VM
+from quri_parts.backend.devices import star_device
+from quri_parts.backend.units import TimeUnit, TimeValue
+
+QURI_VM_AVAILABLE = True
+print("QURI VM successfully imported and available")
 
 
 @dataclass
@@ -125,24 +122,24 @@ class VMCircuitAnalyzer:
         return arch_estimate
     
     def _get_default_star_architecture(self) -> ArchitectureInfo:
-        """Get default STAR architecture configuration."""
+        """Get default STAR architecture configuration for H6 calculations."""
         return ArchitectureInfo(
             name="STAR",
-            num_physical_qubits=100,
+            num_physical_qubits=25,  # H6 needs 12 logical qubits + overhead
             connectivity="star",
             gate_fidelities={
-                "single": 0.999,
-                "two_qubit": 0.99,
-                "measurement": 0.95
+                "single": 0.9999,     # High fidelity for STAR logical gates
+                "two_qubit": 0.999,   # CNOT between logical qubits
+                "measurement": 0.99   # Logical measurement fidelity
             },
             decoherence_times={
-                "T1": 100.0,  # microseconds
-                "T2": 50.0    # microseconds
+                "T1": 1000.0,  # microseconds (STAR has long coherence)
+                "T2": 500.0    # microseconds (dephasing time)
             },
             gate_times={
-                "single": 0.1,     # microseconds
-                "two_qubit": 0.5,  # microseconds
-                "measurement": 1.0 # microseconds
+                "single": 1.0,      # microseconds (includes QEC overhead)
+                "two_qubit": 5.0,   # microseconds (CNOT with error correction)
+                "measurement": 10.0 # microseconds (includes syndrome extraction)
             }
         )
     
@@ -474,6 +471,189 @@ def demonstrate_star_architecture_analysis():
     print(f"  Max qubits: {arch_analysis.max_physical_qubit_count}")
     print(f"  SWAP overhead: {arch_analysis.total_swap_overhead}")
     print(f"  Average fidelity: {arch_analysis.average_fidelity:.4f}")
+
+
+class VMSampler:
+    """VM-based sampler implementing quri-parts ConcurrentSampler interface."""
+    
+    def __init__(self, vm_instance):
+        """Initialize VM sampler.
+        
+        Args:
+            vm_instance: Pre-configured QURI VM instance
+        """
+        self.vm = vm_instance
+    
+    def __call__(self, circuit_shot_pairs):
+        """Sample from circuits using VM.sample() interface.
+        
+        Args:
+            circuit_shot_pairs: List of (circuit, shots) tuples
+            
+        Returns:
+            List of MeasurementCounts for each circuit
+        """
+        results = []
+        
+        for circuit, shots in circuit_shot_pairs:
+            try:
+                # Delegate directly to VM - all error modeling is VM-internal
+                result = self.vm.sample(circuit, shots)
+                # VM.sample() should return Counter format expected by quri-parts
+                results.append(result)
+            except Exception as e:
+                raise RuntimeError(f"VM sampling failed: {e}. Ensure QURI VM is properly configured.") from e
+        
+        return results
+
+
+
+class VMFactory:
+    """Factory for creating pre-configured QURI VM instances."""
+    
+    @staticmethod
+    def create_ideal_vm() -> 'VM':
+        """Create ideal VM for LogicalCircuit level sampling.
+        
+        Returns:
+            VM instance configured for ideal quantum computation
+        """
+        # Create abstract ideal VM (no device-specific constraints) 
+        # Following tutorial: VM() creates abstract VM
+        return VM()
+    
+    @staticmethod
+    def create_star_vm(error_rate: float = 0.0) -> 'VM':
+        """Create STAR architecture VM with specified error rate.
+        
+        Args:
+            error_rate: Physical error rate (0.0 to 1.0)
+            
+        Returns:
+            VM instance configured with STAR device properties for given error rate
+        """
+        # Following tutorial: Create STAR VM with specific physical error rate
+        # QEC cycle time (1.0 microsecond is standard)
+        qec_cycle = TimeValue(value=1.0, unit=TimeUnit.MICROSECOND)
+        
+        # Generate STAR device property with physical error rate
+        # Following tutorial pattern for error rate configuration
+        device_property = star_device.generate_device_property(
+            qubit_count=16,  # Sufficient for H6 (12 qubits) + overhead
+            code_distance=7,  # Standard distance for fault tolerance
+            qec_cycle=qec_cycle,
+            physical_error_rate=error_rate  # This is the key parameter from tutorial
+        )
+        
+        return VM.from_device_prop(device_property)
+    
+    @staticmethod
+    def create_star_vm_for_h6(error_rate: float = 0.0) -> 'VM':
+        """Create STAR VM optimized for H6 TE-QSCI calculations.
+        
+        Args:
+            error_rate: Physical error rate for STAR architecture
+            
+        Returns:
+            VM instance optimized for H6 molecular calculations
+        """
+        return VMFactory.create_star_vm(error_rate)
+
+
+
+class QURIVMInterface:
+    """Interface to QURI VM for TE-QSCI analysis and sampling."""
+    
+    def __init__(self, logical_vm=None, arch_vm=None):
+        """Initialize QURI VM interface with pre-configured VM instances.
+        
+        Args:
+            logical_vm: Pre-configured VM for LogicalCircuit level (ideal)
+            arch_vm: Pre-configured VM for ArchLogicalCircuit level (with architecture)
+        """
+        if logical_vm is None:
+            logical_vm = VMFactory.create_ideal_vm()
+        if arch_vm is None:
+            arch_vm = VMFactory.create_star_vm(0.0)  # Default to no error
+            
+        self.logical_vm = logical_vm
+        self.arch_vm = arch_vm
+    
+    def analyze_circuit_at_level(
+        self,
+        circuit: NonParametricQuantumCircuit,
+        level: LoweringLevel
+    ) -> Dict[str, Any]:
+        """Analyze circuit at specified lowering level.
+        
+        Args:
+            circuit: Circuit to analyze
+            level: Analysis level (LogicalCircuit or ArchLogicalCircuit)
+            
+        Returns:
+            Analysis results dictionary
+        """
+        if level == LoweringLevel.LogicalCircuit:
+            return self._analyze_logical_level(circuit)
+        elif level == LoweringLevel.ArchLogicalCircuit:
+            return self._analyze_arch_level(circuit)
+        else:
+            # For higher levels, default to arch analysis
+            return self._analyze_arch_level(circuit)
+    
+    def _analyze_logical_level(self, circuit: NonParametricQuantumCircuit) -> Dict[str, Any]:
+        """Analyze at LogicalCircuit level (ideal)."""
+        analysis = self.logical_vm.analyze(circuit)
+        return analysis
+    
+    def _analyze_arch_level(self, circuit: NonParametricQuantumCircuit) -> Dict[str, Any]:
+        """Analyze at ArchLogicalCircuit level (with architecture)."""
+        analysis = self.arch_vm.analyze(circuit)
+        return analysis
+    
+    def create_logical_sampler(self):
+        """Create sampler for LogicalCircuit level (ideal VM).
+        
+        Returns:
+            VMSampler instance for ideal quantum sampling
+        """
+        return VMSampler(self.logical_vm)
+    
+    def create_arch_sampler(self):
+        """Create sampler for ArchLogicalCircuit level (STAR architecture).
+        
+        Returns:
+            VMSampler instance for STAR architecture sampling
+        """
+        return VMSampler(self.arch_vm)
+    
+    def create_sampler(self, level: LoweringLevel):
+        """Create sampler for specified level.
+        
+        Args:
+            level: LoweringLevel for sampling (LogicalCircuit or ArchLogicalCircuit)
+            
+        Returns:
+            VMSampler instance for the specified level
+        """
+        if level == LoweringLevel.LogicalCircuit:
+            return self.create_logical_sampler()
+        elif level == LoweringLevel.ArchLogicalCircuit:
+            return self.create_arch_sampler()
+        else:
+            # Default to arch level for higher levels
+            return self.create_arch_sampler()
+
+
+def create_star_vm_for_h6(error_rate: float = 0.0) -> QURIVMInterface:
+    """Create STAR architecture VM interface optimized for H6 TE-QSCI.
+    
+    Args:
+        error_rate: Physical error rate for STAR architecture (0.0 for ideal)
+    """
+    logical_vm = VMFactory.create_ideal_vm()
+    arch_vm = VMFactory.create_star_vm_for_h6(error_rate)
+    return QURIVMInterface(logical_vm=logical_vm, arch_vm=arch_vm)
 
 
 if __name__ == "__main__":

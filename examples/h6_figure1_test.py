@@ -230,7 +230,7 @@ class H6Figure1Analyzer:
         print("=" * 60)
         
         # Focus on small-t regime for testing
-        times = np.logspace(-2, 0.2, 10)  # 0.01 to ~1 (10 points for quick test)
+        times = np.logspace(-2, 0.5, 15)  # 0.01 to ~1 (10 points for quick test)
         print(f"Testing {len(times)} time points: {times.min():.3f} to {times.max():.3f}")
         
         # Use sampling method (exact too slow for H6)
