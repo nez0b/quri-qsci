@@ -12,7 +12,7 @@ We are committed to providing a welcoming and inspiring community for all. Pleas
 
 1. **Fork and Clone**
    ```bash
-   git clone https://github.com/yourusername/quri-qsci.git
+   git clone https://github.com/nez0b/quri-qsci.git
    cd quri-qsci
    ```
 

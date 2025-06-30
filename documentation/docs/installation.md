@@ -80,7 +80,6 @@ QSCI depends on the following packages:
 ### Development Dependencies
 - **pytest**: Testing framework
 - **mkdocs**: Documentation generation
-- **black**: Code formatting
 
 ## Verification
 
@@ -99,29 +98,6 @@ print("QSCI installation successful!")
 print(f"Hamiltonian: {hamiltonian}")
 ```
 
-## Platform-Specific Notes
-
-### macOS
-On macOS, you might need to install Xcode command line tools:
-
-```bash
-xcode-select --install
-```
-
-### Linux
-Make sure you have the development headers installed:
-
-```bash
-# Ubuntu/Debian
-sudo apt-get install python3-dev build-essential
-
-# CentOS/RHEL
-sudo yum install python3-devel gcc gcc-c++
-```
-
-### Windows
-Install Microsoft Visual C++ Build Tools if you encounter compilation issues.
-
 ## Optional: Quantum Chemistry Support
 
 For molecular examples and PySCF integration:
@@ -135,40 +111,14 @@ This enables:
 - STO-3G and other basis sets  
 - H2, H6 molecular examples
 
-## Docker Installation
-
-A Docker image is available for easy deployment:
+For Configuration Interaction calcualtions, we recommend [pyCI](https://pyci.qcdevs.org/intro.html)
 
 ```bash
-docker pull qunasys/quri-qsci
-docker run -it qunasys/quri-qsci python
+git clone https://github.com/theochem/pyci.git && cd pyci
+make
+pip install pyCI
 ```
 
-## Troubleshooting
-
-### Import Errors
-
-If you encounter import errors:
-
-1. Check that you're in the correct virtual environment
-2. Verify all dependencies are installed
-3. Try reinstalling with `--no-cache-dir` flag
-
-### Performance Issues
-
-For better performance:
-
-1. Install Intel MKL: `pip install mkl`
-2. Use qulacs for fast simulation: `pip install qulacs`
-3. Enable parallel processing in scipy
-
-### Memory Issues
-
-For large systems:
-
-1. Increase system memory or use swap
-2. Use sparse matrix operations
-3. Reduce the number of selected configurations
 
 ## Getting Help
 

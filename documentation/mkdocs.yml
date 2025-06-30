@@ -95,8 +95,10 @@ plugins:
       nav_file: SUMMARY.md
   - section-index
   - mkdocstrings:
+      default_handler: python
       handlers:
         python:
+          paths: [../src]
           options:
             docstring_style: google
             docstring_options:
@@ -130,6 +132,12 @@ nav:
     - Molecular Systems: guides/ffsim_integration/molecular_systems.md
     - Ansatz Creation: guides/ffsim_integration/ansatz_creation.md
     - State Conversion: guides/ffsim_integration/state_conversion.md
+  - VM-Aware QSCI:
+    - Overview: guides/vm_qsci/index.md
+    - Getting Started: guides/vm_qsci/getting_started.md
+    - Authentic Time Evolution: guides/vm_qsci/authentic_time_evolution.md
+    - VM Analysis: guides/vm_qsci/vm_analysis.md
+    - Molecular Systems: guides/vm_qsci/molecular_systems.md
   - Examples:
     - Overview: examples/index.md
   - Testing:
@@ -137,7 +145,7 @@ nav:
   - API Reference:
     - Overview: api/index.md
     - ffsim Integration: api/ffsim_integration.md
-    - api/
+    - VM-Aware QSCI: api/vm_qsci.md
   - Design & Implementation:
     - Overview: design/index.md
 

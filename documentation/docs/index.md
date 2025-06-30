@@ -11,9 +11,8 @@ QSCI is a quantum algorithm for quantum chemistry that leverages time evolution 
 - **Multiple Algorithm Variants**: VanillaQSCI, SingleTimeTE_QSCI, TimeAverageTE_QSCI, and StateVectorTE_QSCI
 - **QURI Ecosystem Integration**: Full compatibility with QURI Parts, QURI Algo, and QURI VM
 - **Time Evolution Methods**: Support for both Trotter decomposition and exact unitary evolution
-- **Quantum Hardware Analysis**: Circuit resource estimation for different quantum architectures
-- **Machine Precision Validation**: Comprehensive testing achieving machine precision accuracy
-- **Scientific Applications**: Validated on molecular systems including H2 and H6 molecules
+- **Quantum Hardware Analysis**: Powered by [QURI-VM](https://github.com/QunaSys/quri-vm) , it supports circuit resource estimation for different quantum architectures, including ideal quantum circuit and FTQC devices
+
 
 ## Algorithm Variants
 
@@ -29,16 +28,6 @@ Time-evolved QSCI averaged over multiple evolution times to improve sampling div
 ### StateVectorTE_QSCI
 Time-evolved QSCI with direct state vector calculation for exact simulation studies.
 
-## Key Innovations
-
-### Uniform Superposition Breakthrough
-Our testing framework discovered that **uniform superposition states** (H⊗H⊗...⊗H) combined with **complete subspace coverage** provides optimal QSCI performance, achieving machine precision accuracy (< 1e-15).
-
-### Time Evolution Integration
-The implementation uses `quri_algo.circuit.time_evolution.trotter_time_evo.TrotterTimeEvolutionCircuitFactory` for efficient Trotter decomposition and quantum circuit generation.
-
-### Comprehensive Validation
-All QSCI variants are validated against exact diagonalization with 100% test success rate (41/41 tests passing), ensuring mathematical correctness and numerical stability.
 
 ## Scientific Background
 
@@ -63,26 +52,6 @@ Explore the complete API documentation:
 - **[Algorithm Interfaces](api/qsci_algo_interface.md)** - QURI-algo compatible interfaces  
 - **[VM Analysis](api/qsci_vm_analysis.md)** - Circuit analysis and resource estimation
 
-## Project Status
-
-**Status**: Production Ready ✅
-
-- ✅ **Complete Algorithm Suite**: Vanilla QSCI and all TE-QSCI variants implemented
-- ✅ **QURI Ecosystem Integration**: Full compatibility with QURI Parts, QURI Algo, and QURI VM
-- ✅ **Scientific Validation**: H6 molecule study with 919-term Hamiltonian producing valid results
-- ✅ **Performance Optimization**: Efficient sparse matrix operations and concurrent sampling
-- ✅ **Architecture Analysis**: Circuit resource estimation for different quantum hardware topologies
-- ✅ **Extensible Architecture**: Modular design enabling easy addition of new features
-
-## Research Applications
-
-This implementation has been validated on:
-
-- **H2 Molecule**: Potential energy curve analysis
-- **H6 Linear Chain**: Complete study with STO-3G basis set  
-- **TFIM Models**: Transverse Field Ising Model at various field strengths
-- **Heisenberg Models**: XXZ Heisenberg model with different coupling parameters
-- **Random Systems**: Validation on random sparse Hamiltonians
 
 ## Contributing
 
@@ -98,11 +67,24 @@ We welcome contributions! Please see our [Contributing Guide](contributing.md) f
 If you use QSCI in your research, please cite:
 
 ```bibtex
-@article{qsci2024,
-  title={Time-Evolved Quantum Selected Configuration Interaction},
-  author={QSCI Development Team},
-  journal={arXiv preprint},
-  year={2024}
+@article{Kanno:2023rfr,
+    author = "Kanno, Keita and Kohda, Masaya and Imai, Ryosuke and Koh, Sho and Mitarai, Kosuke and Mizukami, Wataru and Nakagawa, Yuya O.",
+    title = "{Quantum-Selected Configuration Interaction: classical diagonalization of Hamiltonians in subspaces selected by quantum computers}",
+    eprint = "2302.11320",
+    archivePrefix = "arXiv",
+    primaryClass = "quant-ph",
+    month = "2",
+    year = "2023"
+}
+
+@article{Mikkelsen:2024onz,
+    author = "Mikkelsen, Mathias and Nakagawa, Yuya O.",
+    title = "{Quantum-selected configuration interaction with time-evolved state}",
+    eprint = "2412.13839",
+    archivePrefix = "arXiv",
+    primaryClass = "quant-ph",
+    month = "12",
+    year = "2024"
 }
 ```
 

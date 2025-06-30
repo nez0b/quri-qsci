@@ -152,37 +152,26 @@ def generate_pauli_strings(n_qubits: int) -> List[Tuple[PauliLabel, np.ndarray]]
     return pauli_strings
 
 
-def create_diverse_superposition_state(n_qubits: int, theta: float = np.pi/6) -> GeneralCircuitQuantumState:
+def create_diverse_superposition_state(n_qubits: int) -> GeneralCircuitQuantumState:
     """
     Create a quantum state with diverse measurement outcomes for QSCI testing.
-    
+
     This creates a superposition state that will yield multiple different
     computational basis states when measured, ensuring QSCI has diverse
     input data to work with.
-    
+
     Args:
         n_qubits: Number of qubits
-        theta: Rotation angle parameter
-        
+
     Returns:
         Quantum state with measurement diversity
     """
     circuit = QuantumCircuit(n_qubits)
-    
-    # Create superposition with varying rotation angles
+
+    # Create a uniform superposition by applying a Hadamard gate to each qubit
     for i in range(n_qubits):
-        # Different rotation angle for each qubit
-        angle = theta * (i + 1) / n_qubits
-        circuit.add_RY_gate(i, angle)
-    
-    # Add some entanglement
-    for i in range(n_qubits - 1):
-        circuit.add_CNOT_gate(i, i + 1)
-    
-    # Add some more rotations for complexity
-    for i in range(n_qubits):
-        circuit.add_RZ_gate(i, theta / 4)
-    
+        circuit.add_H_gate(i)
+
     return GeneralCircuitQuantumState(n_qubits, circuit)
 
 
@@ -278,49 +267,48 @@ class TestExactDiagonalizationVerification:
     @pytest.mark.parametrize("n_qubits,h_field", [
         (2, 0.5),  # Ferromagnetic phase
         (2, 1.0),  # Critical point
-        (2, 2.0),  # Paramagnetic phase  
+        (2, 2.0),  # Paramagnetic phase
         (3, 1.0),  # 3-qubit critical
     ])
     def test_tfim_hamiltonian_exact(self, n_qubits, h_field, tolerance_settings):
         """Test QSCI against exact diagonalization for TFIM."""
         # Create TFIM Hamiltonian
         hamiltonian_matrix = create_tfim_hamiltonian(n_qubits, h_field)
-        
+
         # Validate Hamiltonian properties
         ham_props = validate_sparse_hamiltonian_properties(hamiltonian_matrix)
         assert ham_props['is_valid_hamiltonian'], "TFIM Hamiltonian should be valid"
-        
+
         # Get exact solution
-        exact_eigenvalues, exact_eigenvectors = get_exact_solution(
+        exact_eigenvalues, _ = get_exact_solution(
             hamiltonian_matrix, num_states=min(3, 2**n_qubits)
         )
-        
-        # Convert to QURI operator  
+        exact_ground_energy = exact_eigenvalues[0]
+
+        # Convert to QURI operator
         quri_hamiltonian = sparse_matrix_to_quri_operator(hamiltonian_matrix, n_qubits)
-        
-        # Create diverse state
-        diverse_state = create_diverse_superposition_state(n_qubits, theta=np.pi/8)
-        
-        # Run QSCI
+
+        # Create uniform superposition state for complete subspace sampling
+        diverse_state = create_diverse_superposition_state(n_qubits)
+
+        # Run QSCI with full subspace selection
         sampler = create_qulacs_vector_concurrent_sampler()
         qsci = VanillaQSCI(
             hamiltonian=quri_hamiltonian,
             sampler=sampler,
-            num_states_pick_out=min(4, 2**(n_qubits-1))
+            num_states_pick_out=2**n_qubits  # Use full subspace
         )
-        
+
         result = qsci.run([diverse_state], total_shots=2000)
-        
-        # Validate ground state energy
-        exact_ground_energy = exact_eigenvalues[0]
+
+        # Validate ground state energy with high precision
         energy_error = abs(result.ground_state_energy - exact_ground_energy)
-        
-        # Use a realistic tolerance for QSCI verification (finite subspace approximation)
-        # QSCI is an approximate method, so we expect larger errors than exact methods
-        verification_tolerance = max(tolerance_settings['eigenvalue_atol'], 0.5)
-        assert energy_error < verification_tolerance, (
+
+        # Use a high precision tolerance for validation
+        precision_tolerance = 1e-9
+        assert energy_error < precision_tolerance, (
             f"TFIM ({n_qubits} qubits, h={h_field}) ground state energy error "
-            f"{energy_error:.6e} exceeds verification tolerance {verification_tolerance:.6e}. "
+            f"{energy_error:.6e} exceeds precision tolerance {precision_tolerance:.6e}. "
             f"QSCI: {result.ground_state_energy:.6f}, Exact: {exact_ground_energy:.6f}"
         )
     
@@ -334,42 +322,41 @@ class TestExactDiagonalizationVerification:
         """Test QSCI against exact diagonalization for Heisenberg model."""
         # Create Heisenberg Hamiltonian
         hamiltonian_matrix = create_heisenberg_hamiltonian(n_qubits, jz, jxy)
-        
+
         # Validate Hamiltonian properties
         ham_props = validate_sparse_hamiltonian_properties(hamiltonian_matrix)
         assert ham_props['is_valid_hamiltonian'], "Heisenberg Hamiltonian should be valid"
-        
+
         # Get exact solution
-        exact_eigenvalues, exact_eigenvectors = get_exact_solution(
+        exact_eigenvalues, _ = get_exact_solution(
             hamiltonian_matrix, num_states=min(3, 2**n_qubits)
         )
-        
+        exact_ground_energy = exact_eigenvalues[0]
+
         # Convert to QURI operator
         quri_hamiltonian = sparse_matrix_to_quri_operator(hamiltonian_matrix, n_qubits)
-        
-        # Create diverse state
-        diverse_state = create_diverse_superposition_state(n_qubits, theta=np.pi/5)
-        
-        # Run QSCI
+
+        # Create uniform superposition state for complete subspace sampling
+        diverse_state = create_diverse_superposition_state(n_qubits)
+
+        # Run QSCI with full subspace selection
         sampler = create_qulacs_vector_concurrent_sampler()
         qsci = VanillaQSCI(
             hamiltonian=quri_hamiltonian,
             sampler=sampler,
-            num_states_pick_out=min(4, 2**(n_qubits-1))
+            num_states_pick_out=2**n_qubits  # Use full subspace
         )
-        
+
         result = qsci.run([diverse_state], total_shots=2000)
-        
-        # Validate ground state energy
-        exact_ground_energy = exact_eigenvalues[0]
+
+        # Validate ground state energy with high precision
         energy_error = abs(result.ground_state_energy - exact_ground_energy)
-        
-        # Use a realistic tolerance for QSCI verification (finite subspace approximation)
-        # QSCI is an approximate method, so we expect larger errors than exact methods
-        verification_tolerance = max(tolerance_settings['eigenvalue_atol'], 0.5)
-        assert energy_error < verification_tolerance, (
+
+        # Use a high precision tolerance for validation
+        precision_tolerance = 1e-9
+        assert energy_error < precision_tolerance, (
             f"Heisenberg ({n_qubits} qubits, Jz={jz}, Jxy={jxy}) ground state energy error "
-            f"{energy_error:.6e} exceeds verification tolerance {verification_tolerance:.6e}. "
+            f"{energy_error:.6e} exceeds precision tolerance {precision_tolerance:.6e}. "
             f"QSCI: {result.ground_state_energy:.6f}, Exact: {exact_ground_energy:.6f}"
         )
     
@@ -377,33 +364,33 @@ class TestExactDiagonalizationVerification:
         """Test QSCI with degenerate eigenvalues (edge case)."""
         # Create Hamiltonian with known degeneracies
         hamiltonian_matrix, known_eigenvalues = create_degenerate_hamiltonian(size=4)
-        
+
         # This is a 4x4 matrix, so we can treat it as a 2-qubit system
         sparse_ham = csc_matrix(hamiltonian_matrix)
         quri_hamiltonian = sparse_matrix_to_quri_operator(sparse_ham, n_qubits=2)
-        
-        # Create diverse state
-        diverse_state = create_diverse_superposition_state(n_qubits=2, theta=np.pi/3)
-        
-        # Run QSCI
+
+        # Create uniform superposition state for complete subspace sampling
+        diverse_state = create_diverse_superposition_state(n_qubits=2)
+
+        # Run QSCI with full subspace selection
         sampler = create_qulacs_vector_concurrent_sampler()
         qsci = VanillaQSCI(
             hamiltonian=quri_hamiltonian,
             sampler=sampler,
-            num_states_pick_out=3
+            num_states_pick_out=4  # Use full subspace
         )
-        
+
         result = qsci.run([diverse_state], total_shots=1500)
-        
-        # Validate ground state energy
+
+        # Validate ground state energy with high precision
         exact_ground_energy = np.min(known_eigenvalues)
         energy_error = abs(result.ground_state_energy - exact_ground_energy)
-        
-        # Use a more realistic tolerance for QSCI verification
-        verification_tolerance = max(tolerance_settings['eigenvalue_atol'], 1e-2)
-        assert energy_error < verification_tolerance, (
+
+        # Use a high precision tolerance for validation
+        precision_tolerance = 1e-9
+        assert energy_error < precision_tolerance, (
             f"Degenerate case ground state energy error {energy_error:.6e} "
-            f"exceeds verification tolerance {verification_tolerance:.6e}"
+            f"exceeds precision tolerance {precision_tolerance:.6e}"
         )
     
     def test_random_sparse_hamiltonian_stress(self, tolerance_settings):
@@ -414,39 +401,39 @@ class TestExactDiagonalizationVerification:
             hamiltonian_matrix = create_random_sparse_hamiltonian(
                 n_qubits, density=0.3, random_seed=42 + trial
             )
-            
+
             # Validate Hamiltonian properties
             ham_props = validate_sparse_hamiltonian_properties(hamiltonian_matrix)
             assert ham_props['is_valid_hamiltonian'], f"Random Hamiltonian {trial} should be valid"
-            
+
             # Get exact solution
             exact_eigenvalues, _ = get_exact_solution(hamiltonian_matrix, num_states=2)
-            
+            exact_ground_energy = exact_eigenvalues[0]
+
             # Convert to QURI operator
             quri_hamiltonian = sparse_matrix_to_quri_operator(hamiltonian_matrix, n_qubits)
-            
-            # Create diverse state
-            diverse_state = create_diverse_superposition_state(n_qubits, theta=np.pi/7)
-            
-            # Run QSCI
+
+            # Create uniform superposition state for complete subspace sampling
+            diverse_state = create_diverse_superposition_state(n_qubits)
+
+            # Run QSCI with full subspace selection
             sampler = create_qulacs_vector_concurrent_sampler()
             qsci = VanillaQSCI(
                 hamiltonian=quri_hamiltonian,
                 sampler=sampler,
-                num_states_pick_out=3
+                num_states_pick_out=2**n_qubits  # Use full subspace
             )
-            
+
             result = qsci.run([diverse_state], total_shots=1500)
-            
-            # Validate ground state energy
-            exact_ground_energy = exact_eigenvalues[0]
+
+            # Validate ground state energy with high precision
             energy_error = abs(result.ground_state_energy - exact_ground_energy)
-            
-            # Use a more realistic tolerance for QSCI verification
-            verification_tolerance = max(tolerance_settings['eigenvalue_atol'], 1e-2)
-            assert energy_error < verification_tolerance, (
+
+            # Use a high precision tolerance for validation
+            precision_tolerance = 1e-9
+            assert energy_error < precision_tolerance, (
                 f"Random sparse Hamiltonian trial {trial} ground state energy error "
-                f"{energy_error:.6e} exceeds verification tolerance {verification_tolerance:.6e}. "
+                f"{energy_error:.6e} exceeds precision tolerance {precision_tolerance:.6e}. "
                 f"QSCI: {result.ground_state_energy:.6f}, Exact: {exact_ground_energy:.6f}"
             )
 
@@ -548,7 +535,7 @@ class TestEdgeCasesVerification:
         quri_hamiltonian = sparse_matrix_to_quri_operator(sparse_ham, n_qubits=2)
         
         # Create diverse state
-        diverse_state = create_diverse_superposition_state(n_qubits=2, theta=np.pi/4)
+        diverse_state = create_diverse_superposition_state(n_qubits=2)
         
         # Run QSCI
         sampler = create_qulacs_vector_concurrent_sampler()
