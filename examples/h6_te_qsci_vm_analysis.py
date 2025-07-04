@@ -29,14 +29,10 @@ Requirements: H 0 0 0; H 0 0 1; H 0 0 2; H 0 0 3; H 0 0 4; H 0 0 5
 
 import numpy as np
 import matplotlib.pyplot as plt
-import sys
-import os
 import time
 from dataclasses import dataclass
 from typing import Dict, List, Optional, Tuple
 
-# Add parent directory to path for imports
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 # QURI Parts imports
 from quri_parts.core.operator import Operator, pauli_label
@@ -56,21 +52,21 @@ from quri_parts.openfermion.mol import get_qubit_mapped_hamiltonian
 from quri_parts.openfermion.transforms import jordan_wigner
 
 # Our implementations
-from src.qsci_algorithms import SingleTimeTE_QSCI
-from src.qsci_algo_interface import LoweringLevel, create_qsci_algorithm, QSCIVariant
-from src.qsci_vm_analysis import (
+from quri_qsci.qsci_algorithms import SingleTimeTE_QSCI
+from quri_qsci.qsci_algo_interface import LoweringLevel, create_qsci_algorithm, QSCIVariant
+from quri_qsci.qsci_vm_analysis import (
     QURIVMInterface, 
     VMCircuitAnalyzer, 
     VMEnabledQSCIAlgorithm,
     create_star_vm_for_h6
 )
-from src.qsci_vm_interface import (
+from quri_qsci.qsci_vm_interface import (
     VMAwareSingleTimeTE_QSCI,
     TEQSCIVMResult,
     VMAnalysisResult,
     create_vm_aware_te_qsci
 )
-from src.qsci_algo_interface import LoweringLevel
+from quri_qsci.qsci_algo_interface import LoweringLevel
 
 
 @dataclass
@@ -235,7 +231,7 @@ class H6TEQSCIVMAnalysis:
     def _setup_te_qsci_algorithm(self):
         """Setup VM-aware TE-QSCI algorithms with separate VM instances for each error level."""
         from quri_parts.qulacs.sampler import create_qulacs_vector_concurrent_sampler
-        from src.qsci_vm_analysis import VMFactory, QURIVMInterface
+        from quri_qsci.qsci_vm_analysis import VMFactory, QURIVMInterface
         
         # Create fallback sampler
         fallback_sampler = create_qulacs_vector_concurrent_sampler()

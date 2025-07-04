@@ -19,15 +19,15 @@ from quri_parts.core.operator import Operator, pauli_label
 from quri_parts.backend.units import TimeValue, TimeUnit
 
 # Module under test
-from src.qsci_vm_interface import (
+from quri_qsci.qsci_vm_interface import (
     VMAwareSingleTimeTE_QSCI,
     VMAwareTimeEvolutionCircuit,
     TEQSCIVMResult,
     VMAnalysisResult,
     create_vm_aware_te_qsci,
 )
-from src.qsci_vm_analysis import QURIVMInterface, VMSampler
-from src.qsci_algo_interface import LoweringLevel
+from quri_qsci.qsci_vm_analysis import QURIVMInterface, VMSampler
+from quri_qsci.qsci_algo_interface import LoweringLevel
 
 
 @pytest.fixture

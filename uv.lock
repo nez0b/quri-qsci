@@ -1895,7 +1895,6 @@ name = "quri-qsci"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [
-    { name = "ffsim" },
     { name = "mkdocs" },
     { name = "mkdocs-gen-files" },
     { name = "mkdocs-literate-nav" },
@@ -1959,7 +1958,6 @@ ffsim = [
 [package.metadata]
 requires-dist = [
     { name = "black", marker = "extra == 'dev'", specifier = ">=22.0" },
-    { name = "ffsim", specifier = ">=0.0.57" },
     { name = "ffsim", marker = "extra == 'ffsim'", specifier = ">=0.0.57" },
     { name = "flake8", marker = "extra == 'dev'", specifier = ">=4.0" },
     { name = "isort", marker = "extra == 'dev'", specifier = ">=5.0" },

@@ -1,4 +1,120 @@
-# TE-QSCI Examples
+# QSCI (Quantum Selected Configuration Interaction)
+
+Implementation of QSCI algorithms and Time-Evolved QSCI (TE-QSCI) variants using the QURI Parts framework, with optional ffsim integration for advanced molecular ansatz support.
+
+## Installation
+
+### Basic Installation
+
+Install the core QSCI package without optional dependencies:
+
+```bash
+pip install quri-qsci
+```
+
+Or for development:
+
+```bash
+git clone <repository-url>
+cd quri-qsci
+uv add .
+```
+
+### Optional Dependencies
+
+#### ffsim Integration
+
+For advanced molecular ansatz support (UCJ/LUCJ), install the ffsim integration:
+
+```bash
+# Install with ffsim support
+pip install quri-qsci[ffsim]
+
+# Or for development
+uv add --optional ffsim ffsim
+```
+
+The `ffsim_integration` submodule provides:
+- UCJ (Unitary Coupled Cluster) ansatz support  
+- LUCJ (Low-rank UCJ) ansatz support
+- Molecular system creation utilities for H2, N2, etc.
+- State conversion between ffsim and QURI Parts formats
+- High-level QSCI-ffsim integration interface
+
+#### All Optional Dependencies
+
+Install all optional features:
+
+```bash
+pip install quri-qsci[all]
+```
+
+This includes:
+- `ffsim`: Advanced molecular ansatz support
+- `dev`: Development tools (pytest, black, isort, flake8)
+- `docs`: Documentation tools (mkdocs, etc.)
+- `examples`: Example dependencies (matplotlib, seaborn, etc.)
+
+### Verification
+
+Verify your installation:
+
+```bash
+# Test core functionality
+python -c "import quri_qsci; print('✓ Core QSCI installed')"
+
+# Test ffsim integration (if installed)
+python -c "import ffsim_integration; print('✓ ffsim integration available')"
+```
+
+### Running Tests
+
+```bash
+# Run all tests (automatically skips optional dependencies not installed)
+pytest
+
+# Run only core tests (skip ffsim tests)
+pytest -m "not ffsim"
+
+# Run only ffsim tests (requires ffsim installation)
+pytest -m "ffsim"
+```
+
+## Quick Start
+
+### Core QSCI Example
+
+```python
+from quri_qsci import VanillaQSCI, TimeEvolvedQSCI
+import numpy as np
+
+# Create a simple Hamiltonian
+hamiltonian = np.array([[1, 0.5], [0.5, 2]])
+
+# Run Vanilla QSCI
+qsci = VanillaQSCI(hamiltonian, num_states_pick_out=10)
+result = qsci.run(num_eigenstates=1)
+print(f"Ground state energy: {result.ground_state_energy}")
+```
+
+### ffsim Integration Example (requires ffsim)
+
+```python
+from ffsim_integration import create_h2_molecule, run_lucj_qsci
+
+# Create H2 molecule system
+h2_system = create_h2_molecule(basis="sto-3g", bond_length=0.74)
+
+# Run LUCJ-QSCI calculation
+result = run_lucj_qsci(
+    molecular_system=h2_system,
+    n_reps=1,
+    num_states_pick_out=20
+)
+print(f"LUCJ-QSCI energy: {result.qsci_energy:.6f} Ha")
+```
+
+## TE-QSCI Examples
 
 This directory contains comprehensive examples demonstrating the TE-QSCI (Time-Evolved Quantum Selected Configuration Interaction) implementation with the QURI ecosystem.
 

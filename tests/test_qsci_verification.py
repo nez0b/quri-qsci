@@ -35,7 +35,7 @@ from .utils.hamiltonian_factory import (
 )
 
 try:
-    from src.qsci_algorithms import VanillaQSCI
+    from quri_qsci.qsci_algorithms import VanillaQSCI
     from quri_parts.core.operator import Operator
     from quri_parts.core.operator.pauli import PauliLabel, pauli_label
     from quri_parts.core.state import GeneralCircuitQuantumState

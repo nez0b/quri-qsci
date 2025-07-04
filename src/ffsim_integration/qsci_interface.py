@@ -28,7 +28,7 @@ def _require_ffsim():
         )
 
 # QSCI imports from parent package
-from qsci_algorithms import VanillaQSCI, QSCIResult
+from quri_qsci.qsci_algorithms import VanillaQSCI, QSCIResult
 
 # Local imports
 from .molecular_systems import MolecularSystem, create_h2_molecule, create_n2_molecule

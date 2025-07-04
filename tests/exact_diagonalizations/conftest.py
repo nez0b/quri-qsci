@@ -14,7 +14,7 @@ import os
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
 
 try:
-    from src.qsci_algorithms import VanillaQSCI, TimeEvolvedQSCI, SingleTimeTE_QSCI, TimeAverageTE_QSCI, StateVectorTE_QSCI
+    from quri_qsci.qsci_algorithms import VanillaQSCI, TimeEvolvedQSCI, SingleTimeTE_QSCI, TimeAverageTE_QSCI, StateVectorTE_QSCI
     from quri_parts.core.operator import Operator
     from quri_parts.core.state import GeneralCircuitQuantumState
     from quri_parts.circuit import QuantumCircuit

@@ -11,11 +11,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from typing import Dict, List, Optional, Sequence, Tuple
 import time
-import sys
-import os
 
-# Add parent directory to path to import src module
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 # QURI Parts imports
 from quri_parts.core.operator import Operator, pauli_label
@@ -31,14 +27,14 @@ from quri_parts.openfermion.mol import get_qubit_mapped_hamiltonian
 from quri_parts.openfermion.transforms import jordan_wigner
 
 # Our QSCI implementations
-from src import (
+from quri_qsci import (
     QSCIVariant, VanillaQSCI, TimeEvolvedQSCI,
     create_qsci_algorithm, VanillaQSCIAlgorithm,
     SingleTimeTeQSCIAlgorithm, TimeAverageTeQSCIAlgorithm,
     LoweringLevel
 )
-from src.qsci_vm_analysis import create_vm_enabled_algorithm
-from src.probability_calculator import ProbabilityCalculator, H6FigureOneAnalyzer
+from quri_qsci.qsci_vm_analysis import create_vm_enabled_algorithm
+from quri_qsci.probability_calculator import ProbabilityCalculator, H6FigureOneAnalyzer
 
 
 class H6MoleculeStudy:
@@ -930,7 +926,6 @@ class H6MoleculeStudy:
             if hasattr(self, 'analyze_scaling_behavior'):
                 # Capture scaling analysis output
                 import io
-                import sys
                 old_stdout = sys.stdout
                 sys.stdout = buffer = io.StringIO()
                 
@@ -949,7 +944,13 @@ class H6MoleculeStudy:
             plt.axis('off')
         
         plt.tight_layout()
-        plt.savefig('/Users/nez0b/Code/Quantum/qunasys/te-qsci/h6_results.png', 
+        # Create figures directory if it doesn't exist
+        import os
+        figures_dir = os.path.join(os.path.dirname(__file__), '..', 'figures')
+        os.makedirs(figures_dir, exist_ok=True)
+        save_path = os.path.join(figures_dir, 'h6_results.png')
+        
+        plt.savefig(save_path, 
                    dpi=300, bbox_inches='tight')
         plt.show()
     

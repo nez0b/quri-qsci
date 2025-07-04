@@ -896,7 +896,7 @@ class FfsimStateVectorQSCI(QSCIBase):
         """
         # Import from ffsim module
         try:
-            from .ffsim_integration.state_conversion import _map_fermionic_amplitudes_directly
+            from ffsim_integration.state_conversion import _map_fermionic_amplitudes_directly
             
             # Convert fermionic state vector to computational basis amplitudes
             computational_amplitudes = _map_fermionic_amplitudes_directly(

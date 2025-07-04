@@ -23,7 +23,7 @@ from .utils.conversion_utils import (
 )
 
 try:
-    from src.qsci_algorithms import VanillaQSCI
+    from quri_qsci.qsci_algorithms import VanillaQSCI
     from quri_parts.core.operator import Operator
     QSCI_AVAILABLE = True
 except ImportError:

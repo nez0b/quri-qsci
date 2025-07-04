@@ -14,12 +14,12 @@ from unittest.mock import Mock, patch, MagicMock
 from quri_parts.backend.units import TimeValue, TimeUnit
 
 # Module under test
-from src.qsci_vm_analysis import (
+from quri_qsci.qsci_vm_analysis import (
     VMFactory,
     VMSampler,
     QURIVMInterface,
 )
-from src.qsci_algo_interface import LoweringLevel
+from quri_qsci.qsci_algo_interface import LoweringLevel
 
 
 @pytest.fixture
@@ -35,7 +35,7 @@ def mock_circuit():
 class TestVMFactory:
     """Tests for the VMFactory class."""
 
-    @patch('src.qsci_vm_analysis.VM')
+    @patch('quri_qsci.qsci_vm_analysis.VM')
     def test_create_ideal_vm(self, mock_vm_class):
         """
         Verify that create_ideal_vm creates an abstract VM instance.
@@ -52,10 +52,10 @@ class TestVMFactory:
         mock_vm_class.assert_called_once_with()
         assert vm is mock_vm_instance
 
-    @patch('src.qsci_vm_analysis.star_device')
-    @patch('src.qsci_vm_analysis.VM')
-    @patch('src.qsci_vm_analysis.TimeValue')
-    @patch('src.qsci_vm_analysis.TimeUnit')
+    @patch('quri_qsci.qsci_vm_analysis.star_device')
+    @patch('quri_qsci.qsci_vm_analysis.VM')
+    @patch('quri_qsci.qsci_vm_analysis.TimeValue')
+    @patch('quri_qsci.qsci_vm_analysis.TimeUnit')
     def test_create_star_vm_success(self, mock_time_unit, mock_time_value, mock_vm_class, mock_star_device):
         """
         Verify that create_star_vm correctly configures a STAR VM.
@@ -92,10 +92,10 @@ class TestVMFactory:
         mock_vm_class.from_device_prop.assert_called_once_with(mock_device_prop)
         assert vm is mock_star_vm_instance
 
-    @patch('src.qsci_vm_analysis.star_device')
-    @patch('src.qsci_vm_analysis.VM')
-    @patch('src.qsci_vm_analysis.TimeValue')
-    @patch('src.qsci_vm_analysis.TimeUnit')
+    @patch('quri_qsci.qsci_vm_analysis.star_device')
+    @patch('quri_qsci.qsci_vm_analysis.VM')
+    @patch('quri_qsci.qsci_vm_analysis.TimeValue')
+    @patch('quri_qsci.qsci_vm_analysis.TimeUnit')
     def test_create_star_vm_default_error_rate(self, mock_time_unit, mock_time_value, mock_vm_class, mock_star_device):
         """Test that create_star_vm works with default error rate of 0.0."""
         # Arrange
@@ -116,7 +116,7 @@ class TestVMFactory:
         assert call_kwargs.get("physical_error_rate") == 0.0
         assert vm is mock_vm_instance
 
-    @patch('src.qsci_vm_analysis.VMFactory.create_star_vm')
+    @patch('quri_qsci.qsci_vm_analysis.VMFactory.create_star_vm')
     def test_create_star_vm_for_h6(self, mock_create_star):
         """Test that create_star_vm_for_h6 delegates to create_star_vm."""
         # Arrange
@@ -238,7 +238,7 @@ class TestVMSampler:
 class TestQURIVMInterface:
     """Tests for the QURIVMInterface class."""
 
-    @patch("src.qsci_vm_analysis.VMFactory")
+    @patch("quri_qsci.qsci_vm_analysis.VMFactory")
     def test_init_with_defaults(self, mock_vm_factory):
         """
         Verify that if no VMs are provided, the interface creates default
@@ -279,7 +279,7 @@ class TestQURIVMInterface:
         # Arrange
         provided_logical_vm = Mock(name="ProvidedLogical")
         
-        with patch("src.qsci_vm_analysis.VMFactory") as mock_factory:
+        with patch("quri_qsci.qsci_vm_analysis.VMFactory") as mock_factory:
             mock_factory.create_star_vm.return_value = Mock(name="DefaultStar")
             
             # Act
@@ -409,11 +409,11 @@ class TestQURIVMInterface:
 class TestCreateStarVMForH6:
     """Tests for the create_star_vm_for_h6 function."""
 
-    @patch("src.qsci_vm_analysis.VMFactory")
+    @patch("quri_qsci.qsci_vm_analysis.VMFactory")
     def test_create_star_vm_for_h6_function(self, mock_vm_factory):
         """Test the standalone create_star_vm_for_h6 function."""
         # Arrange
-        from src.qsci_vm_analysis import create_star_vm_for_h6
+        from quri_qsci.qsci_vm_analysis import create_star_vm_for_h6
         error_rate = 1e-3
         mock_vm = Mock()
         mock_interface = Mock()

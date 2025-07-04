@@ -13,13 +13,9 @@ This serves as a stepping stone before the full R=850 implementation.
 
 import numpy as np
 import matplotlib.pyplot as plt
-import sys
-import os
 from scipy.optimize import curve_fit
 import time
 
-# Add parent directory to path for imports
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 # QURI Parts imports
 from quri_parts.core.operator import Operator, pauli_label
@@ -33,8 +29,8 @@ from quri_parts.openfermion.mol import get_qubit_mapped_hamiltonian
 from quri_parts.openfermion.transforms import jordan_wigner
 
 # Our implementations
-from src.probability_calculator import ProbabilityCalculator
-from src import TimeEvolvedQSCI
+from quri_qsci.probability_calculator import ProbabilityCalculator
+from quri_qsci import TimeEvolvedQSCI
 
 class H6MoleculeStudy:
     """Study of H6 molecule for Figure 1 reproduction."""

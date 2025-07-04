@@ -16,7 +16,7 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')
 
 # Try importing our modules
 try:
-    from src import (
+    from quri_qsci import (
         QSCIVariant, VanillaQSCI, TimeEvolvedQSCI, QSCIResult,
         create_qsci_algorithm, VanillaQSCIAlgorithm, SingleTimeTeQSCIAlgorithm,
         LoweringLevel, create_vm_enabled_algorithm

@@ -13,11 +13,7 @@ plots the error compared to the exact CASCI energy.
 import numpy as np
 import matplotlib.pyplot as plt
 import time
-import sys
-import os
 
-# Add parent directory to path
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 # PySCF and quantum chemistry imports
 from pyscf import gto, scf, mcscf, fci, ao2mo
@@ -32,7 +28,7 @@ from quri_parts.openfermion.transforms import jordan_wigner
 from quri_parts.qulacs.sampler import create_qulacs_vector_concurrent_sampler
 
 # QURI-QSCI imports
-from src import create_qsci_algorithm, QSCIVariant
+from quri_qsci import create_qsci_algorithm, QSCIVariant
 
 # Qiskit SQD imports
 try:

@@ -18,7 +18,7 @@ import os
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 try:
-    from src.qsci_algorithms import VanillaQSCI, QSCIBase
+    from quri_qsci.qsci_algorithms import VanillaQSCI, QSCIBase
     from quri_parts.core.operator import Operator
     from quri_parts.qulacs.sampler import create_qulacs_vector_concurrent_sampler
     QSCI_AVAILABLE = True

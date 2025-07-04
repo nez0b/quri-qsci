@@ -29,12 +29,11 @@ from .qsci_vm_analysis import (
     create_vm_enabled_algorithm
 )
 
-# Optional ffsim module - only available if ffsim is installed
+# Optional ffsim module availability check
 try:
-    from . import ffsim_integration
+    import ffsim
     FFSIM_AVAILABLE = True
 except ImportError:
-    ffsim_integration = None
     FFSIM_AVAILABLE = False
 
 __version__ = "0.1.0"
@@ -49,6 +48,6 @@ __all__ = [
     "create_qsci_algorithm", "LoweringLevel",
     # VM analysis
     "CircuitResourceEstimate", "VMCircuitAnalyzer", "create_vm_enabled_algorithm",
-    # Optional ffsim module
-    "ffsim_integration", "FFSIM_AVAILABLE"
+    # Optional ffsim module availability flag
+    "FFSIM_AVAILABLE"
 ]

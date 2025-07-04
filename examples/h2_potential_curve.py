@@ -17,11 +17,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 import time
-import sys
-import os
 
-# Add parent directory to path
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 # PySCF and quantum chemistry imports
 from pyscf import scf, gto
@@ -48,7 +44,7 @@ from quri_parts.algo.optimizer import OptimizerStatus, LBFGS
 from quri_parts.qulacs.sampler import create_qulacs_vector_concurrent_sampler
 
 # Our QSCI implementations
-from src import (
+from quri_qsci import (
     create_qsci_algorithm, QSCIVariant,
     VanillaQSCIAlgorithm, SingleTimeTeQSCIAlgorithm, TimeAverageTeQSCIAlgorithm
 )

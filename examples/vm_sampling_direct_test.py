@@ -7,15 +7,11 @@ Test VM.sample() directly with different error rates to see if the VMs
 actually produce different sampling results.
 """
 
-import sys
-import os
 from collections import Counter
 
-# Add parent directory to path for imports
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from quri_parts.circuit import QuantumCircuit
-from src.qsci_vm_analysis import VMFactory
+from quri_qsci.qsci_vm_analysis import VMFactory
 
 def test_vm_sampling_differences():
     """Test that different VMs produce different sampling results."""

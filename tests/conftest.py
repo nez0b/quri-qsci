@@ -18,6 +18,37 @@ from .utils.hamiltonian_factory import (
 )
 
 
+# Check if ffsim is available
+try:
+    import ffsim
+    FFSIM_AVAILABLE = True
+except ImportError:
+    FFSIM_AVAILABLE = False
+
+
+def pytest_configure(config):
+    """Configure pytest with custom markers."""
+    config.addinivalue_line(
+        "markers", "ffsim: mark test as requiring ffsim optional dependency"
+    )
+
+
+def pytest_collection_modifyitems(config, items):
+    """Automatically mark and skip tests that require ffsim when it's not available."""
+    if FFSIM_AVAILABLE:
+        return  # ffsim is available, don't skip anything
+        
+    skip_ffsim = pytest.mark.skip(reason="ffsim not available - install with: pip install quri-qsci[ffsim]")
+    
+    for item in items:
+        # Skip any test in the ffsim_integration directory
+        if "ffsim_integration" in str(item.fspath):
+            item.add_marker(skip_ffsim)
+        # Skip tests explicitly marked with @pytest.mark.ffsim
+        elif item.get_closest_marker("ffsim"):
+            item.add_marker(skip_ffsim)
+
+
 @pytest.fixture
 def simple_2x2_hamiltonian():
     """A simple 2x2 Hermitian matrix with known eigenvalues and eigenvectors."""

@@ -25,7 +25,7 @@ from quri_parts.chem.transforms.fermion_operator import FermionOperator
 from quri_parts.qulacs.sampler import create_qulacs_vector_concurrent_sampler
 
 # QURI-QSCI imports
-from src import create_qsci_algorithm, QSCIVariant, VanillaQSCI
+from quri_qsci import create_qsci_algorithm, QSCIVariant, VanillaQSCI
 
 # Qiskit SQD imports
 try:

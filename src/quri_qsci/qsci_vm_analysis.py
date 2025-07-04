@@ -25,7 +25,7 @@ from quri_parts.backend.devices import star_device
 from quri_parts.backend.units import TimeUnit, TimeValue
 
 QURI_VM_AVAILABLE = True
-print("QURI VM successfully imported and available")
+# QURI VM imported successfully
 
 
 @dataclass

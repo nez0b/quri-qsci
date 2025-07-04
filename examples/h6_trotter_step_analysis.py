@@ -9,11 +9,7 @@ TE-QSCI calculations for the H6 molecule. It plots the energy error
 
 import numpy as np
 import matplotlib.pyplot as plt
-import sys
-import os
 
-# Add parent directory to path to import src module
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 # QURI Parts imports
 from quri_parts.core.operator import Operator
@@ -28,7 +24,7 @@ from quri_parts.openfermion.mol import get_qubit_mapped_hamiltonian
 from quri_parts.openfermion.transforms import jordan_wigner
 
 # Our QSCI implementations
-from src import (
+from quri_qsci import (
     create_qsci_algorithm,
     QSCIVariant,
 )

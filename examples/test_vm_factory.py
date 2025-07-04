@@ -3,15 +3,11 @@
 Test script to verify VMFactory architecture works correctly.
 """
 
-import sys
-import os
 
-# Add src to path
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), 'src')))
 
 def test_vm_factory_exceptions():
     """Test that VMFactory properly raises exceptions when QURI VM unavailable."""
-    from src.qsci_vm_analysis import VMFactory, VMSampler, QURIVMInterface
+    from quri_qsci.qsci_vm_analysis import VMFactory, VMSampler, QURIVMInterface
     
     print("Testing VMFactory exception handling...")
     
@@ -44,7 +40,7 @@ def test_vm_factory_exceptions():
 
 def test_vm_factory_error_rate_differences():
     """Test that different error rates would create different configurations."""
-    from src.qsci_vm_analysis import VMFactory
+    from quri_qsci.qsci_vm_analysis import VMFactory
     
     print("\nTesting VMFactory error rate mapping...")
     
@@ -76,7 +72,7 @@ def test_architecture_design():
     print("\nTesting architecture design...")
     
     # Check that we have the required classes
-    from src.qsci_vm_analysis import VMFactory, VMSampler, QURIVMInterface
+    from quri_qsci.qsci_vm_analysis import VMFactory, VMSampler, QURIVMInterface
     
     # Check VMFactory has the right methods
     if hasattr(VMFactory, 'create_ideal_vm') and hasattr(VMFactory, 'create_star_vm'):

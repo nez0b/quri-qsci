@@ -35,7 +35,7 @@ from utils.exact_ground_state_utils import (
 )
 
 try:
-    from src.qsci_algorithms import (
+    from quri_qsci.qsci_algorithms import (
         VanillaQSCI, SingleTimeTE_QSCI, TimeAverageTE_QSCI, StateVectorTE_QSCI
     )
     from quri_parts.core.operator import Operator

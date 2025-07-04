@@ -18,6 +18,9 @@ import sys
 import os
 from scipy.special import comb
 
+# Mark all tests in this module as requiring ffsim
+pytestmark = pytest.mark.ffsim
+
 # Skip all tests if ffsim is not available
 pytest.importorskip("ffsim", reason="ffsim is required for this test module")
 

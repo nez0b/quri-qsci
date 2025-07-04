@@ -4,6 +4,9 @@ Test suite for ffsim molecular systems module.
 
 import pytest
 
+# Mark all tests in this module as requiring ffsim
+pytestmark = pytest.mark.ffsim
+
 # Skip all tests if ffsim is not available
 pytest.importorskip("ffsim", reason="ffsim is required for this test module")
 
