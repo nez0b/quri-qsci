@@ -85,8 +85,8 @@ def run_trotter_analysis():
     print(f"H6 Hamiltonian created. Exact FCI energy: {exact_energy:.6f} Ha")
 
     # Parameters for the study
-    evolution_times = np.linspace(0, 2.8, 15)
-    trotter_step_sizes = [0.1, 0.2, 0.5]
+    evolution_times = np.linspace(0.2, 2.6, 30)
+    trotter_step_sizes = [0.01, 0.1, 0.2, 0.5]
     subspace_size_R = 90
     total_shots = 100000
 

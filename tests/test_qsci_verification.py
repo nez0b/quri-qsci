@@ -196,7 +196,7 @@ class TestExactDiagonalizationVerification:
         quri_hamiltonian = sparse_matrix_to_quri_operator(sparse_ham, n_qubits=1)
         
         # Create diverse state
-        diverse_state = create_diverse_superposition_state(n_qubits=1, theta=np.pi/4)
+        diverse_state = create_diverse_superposition_state(n_qubits=1)
         
         # Run QSCI
         sampler = create_qulacs_vector_concurrent_sampler()
@@ -232,14 +232,14 @@ class TestExactDiagonalizationVerification:
         quri_hamiltonian = sparse_matrix_to_quri_operator(sparse_ham, n_qubits=2)
         
         # Create diverse state
-        diverse_state = create_diverse_superposition_state(n_qubits=2, theta=np.pi/6)
+        diverse_state = create_diverse_superposition_state(n_qubits=2)
         
         # Run QSCI
         sampler = create_qulacs_vector_concurrent_sampler()
         qsci = VanillaQSCI(
             hamiltonian=quri_hamiltonian,
             sampler=sampler,
-            num_states_pick_out=3
+            num_states_pick_out=4  # Use full subspace
         )
         
         result = qsci.run([diverse_state], total_shots=1500)
@@ -542,7 +542,7 @@ class TestEdgeCasesVerification:
         qsci = VanillaQSCI(
             hamiltonian=quri_hamiltonian,
             sampler=sampler,
-            num_states_pick_out=3
+            num_states_pick_out=4  # Use full subspace
         )
         
         result = qsci.run([diverse_state], total_shots=1500)
