@@ -9,6 +9,8 @@ design.txt
 .clinerules
 .DS_Store
 figures/
+*.npy
+*.pkl
 
 # C extensions
 *.so
